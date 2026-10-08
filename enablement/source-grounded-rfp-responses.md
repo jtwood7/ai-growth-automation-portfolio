@@ -1,8 +1,6 @@
 # Source-Grounded RFP Responses
 
-**Portfolio adaptation of:** An internal, source-grounded RFP/RFI response assistant  
-**Category:** Proposal response automation / retrieval and review  
-**Artifact status:** Documented *functional prototype* in the source catalog; implementation files not provided here
+**Function:** Proposal response automation / retrieval and review  
 
 ## Business problem
 RFP responses require exhaustive coverage of questions and defensible answers. Unsupported claims can create security, procurement and commercial risk.
@@ -35,7 +33,7 @@ A structured answer table containing original question ID, source-backed respons
 - Treat confidence as a **review signal**, not proof of factual correctness.
 - Do not hallucinate missing security/compliance answers.
 
-## What this demonstrates
-Document parsing, evidence retrieval, structured generation and review governance. The catalog labels the original as a **functional prototype**, but no tests, source files or executable GPT export were supplied for this portfolio.
+## GTM value
 
-[← AI enablement index](README.md)
+Creates a more repeatable proposal workflow: extract every requirement, retrieve authoritative support, draft structured answers and route evidence gaps to the right owner. The emphasis is **response completeness, traceable proof and faster SME review**.
+[← Sales systems](../sales/README.md)
