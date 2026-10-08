@@ -1,6 +1,6 @@
 # Evidence-Grounded Messaging
 
-**Portfolio adaptation of:** “QGenda Evidence Assistant” in the AI Tool Library  
+**Portfolio adaptation of:** An internal customer-evidence retrieval and messaging assistant  
 **Category:** Knowledge retrieval / sales and marketing enablement  
 **Artifact status:** Documented design, not a working GPT export
 
