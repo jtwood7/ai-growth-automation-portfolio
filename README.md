@@ -1,62 +1,62 @@
-# AI-Powered GTM Acquisition Systems
+# AI Growth & GTM Automation Portfolio
 
-**A technical portfolio of two n8n acquisition-automation prototypes.** These examples use synthetic data and illustrate architecture and decision logic; they are **not production deployments or measured campaign results**.
+**Two acquisition-system prototypes · Five AI enablement case studies**  
+Designing repeatable ways to find, prioritize, engage and enable B2B buyers.
 
-## At a glance
+> **Reviewer note:** This portfolio separates **n8n workflow prototypes** from **documented enterprise GPT designs**. The former include sanitized, inactive workflow JSON; the latter are case-study descriptions, **not downloadable GPTs or working reproductions**. No production results are claimed.
 
-```mermaid
-flowchart LR
-    A["Buying signal or closed-lost account"] --> B["Qualification + identity"]
-    B --> C["Intent / engagement decisions"]
-    C --> D["Personalized next action"]
-    D --> E["Sales handoff or nurture"]
-```
+## Start here — choose what you want to evaluate
 
-| Project | The problem | Evidence in the prototype |
+| Area | Best for evaluating | Start with |
 |---|---|---|
-| **[01 · Rep Empowerment Engine](docs/rep-empowerment.md)** | Help reps prioritize and work leads when intent spikes. | Synthetic contact enrichment, weighted engagement/intent scoring, three-tier routing, drafted rep packet, promotion concept. |
-| **[02 · Closed-Lost Reactivation](docs/reactivation.md)** | Surface previously lost deals when meaningful buying conditions change. | Loss-reason branching, budget/expansion/new-hire triggers, contact verification gates, conceptual gifting and outbound orchestration. |
+| **01 · [Acquisition Systems](acquisition/README.md)** | Intent signals, enrichment, routing, orchestration and technical decision logic | [Rep Empowerment Engine](docs/rep-empowerment.md) |
+| **02 · [AI Sales & Marketing Enablement](enablement/README.md)** | Task-specific assistants, structured output, knowledge grounding and AI adoption | [Account Strategy Copilot](enablement/account-strategy-copilot.md) |
+| **03 · [Implementation & Trust Boundaries](docs/technical-notes.md)** | What works, what is mocked and what would be required for production | [Workflow import notes](WORKFLOW-IMPORT-NOTES.md) |
 
-## 01 / Rep Empowerment Engine
-
-```mermaid
-flowchart LR
-    A["Intent webhook"] --> B["Known contacts + mocked enrichment"]
-    B --> C["Score each contact"]
-    C --> D{"Tier"}
-    D -->|1| E["Rep prep packet + mock CRM/Slack handoff"]
-    D -->|2| F["Mock nurture / engagement promotion"]
-    D -->|3| G["Paid audience record, not synchronized"]
-    F -.->|"Synthetic threshold"| E
-```
-
-Scoring formula: **2 × opens + 5 × clicks + 4 × visits + 0.3 × account intent + role weight**. Tier 1 begins at **45**, Tier 2 at **20**, and Tier 3 is below **20**. These are illustrative heuristics, not a trained propensity model.
-
-[Technical walkthrough](docs/rep-empowerment.md) · [Inspect sanitized n8n JSON](workflows/rep-empowerment-demo.json)
-
-## 02 / Closed-Lost Reactivation
+## 01 / Acquisition systems
 
 ```mermaid
 flowchart LR
-    A["Lost opportunities"] --> B["60-day minimum"]
-    B --> C{"Loss reason"}
-    C -->|Budget| D["9–11 month proxy"]
-    C -->|Timing| E["Expansion event check"]
-    D --> F["Contact verification"]
-    E --> F
-    F --> G["Address validity gate"]
-    G --> H["Proposed copy, gifting + outbound"]
-    H --> I["Proposed sales handoff"]
+ A[Account signal / closed-lost context] --> B[Contact and account evaluation]
+ B --> C[Qualification and routing]
+ C --> D[Rep action / nurture concept]
 ```
 
-This flow is an **architecture prototype**: live CRM filters and provider mappings need implementation; HTTP destinations have been intentionally disabled; the AI-copy node is a placeholder and does **not** call a model.
+| Example | Core design | Inspect |
+|---|---|---|
+| **Rep Empowerment Engine** | Intent webhook, simulated contact enrichment, deterministic scoring, three-tier routing, rep prep | [Walkthrough](docs/rep-empowerment.md) · [22-node n8n JSON](workflows/rep-empowerment-demo.json) |
+| **Closed-Lost Reactivation** | Eligibility, change-in-context triggers, contact verification, proposed multi-touch reactivation | [Walkthrough](docs/reactivation.md) · [42-node architecture JSON](workflows/closed-lost-reactivation-architecture.json) |
 
-[Technical walkthrough](docs/reactivation.md) · [Inspect sanitized n8n JSON](workflows/closed-lost-reactivation-architecture.json)
+**Status:** Synthetic/inactive prototypes. CRM, enrichment and outbound integrations are partly mocked, disabled or unimplemented. The reactivation export has [known unresolved node references](WORKFLOW-IMPORT-NOTES.md).
 
-## Explore
+## 02 / AI enablement library — selected case studies
 
-- [Technical boundaries and engineering work still required](docs/technical-notes.md)
+From a larger internal directory, these five examples illustrate different enablement patterns without distributing proprietary system prompts, customer files or enterprise configurations.
+
+| Tool design | User | Technical pattern | Details |
+|---|---|---|---|
+| **Account Strategy Copilot** | AE | Current research → stakeholder mapping → tailored outreach | [Explore](enablement/account-strategy-copilot.md) |
+| **Signal-Led BDR Research** | BDR | Public triggers → pain hypotheses → supporting proof → email | [Explore](enablement/signal-led-bdr-research.md) |
+| **Evidence-Grounded Messaging** | Sales + marketing | Source retrieval → verifiable claims → reusable assets | [Explore](enablement/evidence-grounded-messaging.md) |
+| **Source-Grounded RFP Responses** | Solutions / proposals | Document intake → answer retrieval → citations + confidence | [Explore](enablement/source-grounded-rfp-responses.md) |
+| **Webinar Lifecycle Campaigns** | Demand generation | Event facts → pre-event drafts → post-event segments | [Explore](enablement/webinar-lifecycle-campaigns.md) |
+
+**Status:** These are descriptions derived from a tool catalog, **not deployable GPT exports**. The actual assistants were developed for an enterprise ChatGPT environment and cannot be independently executed from this repository.
+
+## Technical evidence and review
+
+- [Rep contact scoring — standalone JavaScript exercise](examples/scoring-demo.js)
+- [Synthetic demo fixtures](examples/fixtures/synthetic-contacts.json)
+- [Workflow import limitations](WORKFLOW-IMPORT-NOTES.md)
+- [Implementation notes and known gaps](docs/technical-notes.md)
 - [Sharing and ownership checklist](SHARING-CHECKLIST.md)
-- [Standalone scoring exercise](examples/scoring-demo.js) with [synthetic fixtures](examples/fixtures/synthetic-contacts.json): run `node examples/scoring-demo.js` to exercise tier scoring without n8n.
 
-**Important disclosure:** These are demonstrations of design and implementation logic, not evidence of tested provider integrations, production AI agents, live campaign sends, or revenue impact. The workflows are inactive and use synthetic examples. Do not import into a connected production n8n instance. No license for reuse is granted. Distribution rights and confidentiality should be checked before external access.
+### Design principles reflected across the work
+
+- **Inputs before outputs:** Define the audience, authorized knowledge and task before generation.
+- **Rules where appropriate:** Use explicit thresholds and eligibility conditions rather than opaque judgments for spend and routing.
+- **Evidence before persuasion:** Separate observed facts and sourced outcomes from inferred problems and recommendations.
+- **Humans at consequential steps:** Outbound, CRM writes, RFP answers and customer claims require review and proper authorization.
+- **Honest status:** Distinguish prototypes, mock integrations and documented assistant concepts from live deployments.
+
+**Access and reuse:** Private review material. No implied permission to redistribute employer-owned assets. All examples are synthetic or generalized and should be checked for ownership and confidentiality before external sharing.
