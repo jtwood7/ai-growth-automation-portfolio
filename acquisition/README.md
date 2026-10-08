@@ -1,26 +1,30 @@
-# Acquisition systems
+# Acquisition Automation
 
-**Focus:** How buying signals, account data and business rules can produce repeatable acquisition motions.
+Two workflow examples showing how prospect and opportunity data can drive **prioritization, structured decisions and timely sales action**.
 
-| Prototype | Primary logic | Implementation evidence |
-|---|---|---|
-| **[Rep Empowerment Engine](../docs/rep-empowerment.md)** | Account intent → enrichment → deterministic contact scoring → three-tier routing | [22-node synthetic n8n workflow](../workflows/rep-empowerment-demo.json), [scoring exercise](../examples/scoring-demo.js) |
-| **[Closed-Lost Reactivation](../docs/reactivation.md)** | Prior loss context → new opportunity trigger → contact verification → proposed reactivation | [42-node architecture export](../workflows/closed-lost-reactivation-architecture.json), [import limitations](../WORKFLOW-IMPORT-NOTES.md) |
+## Rep Empowerment Engine
+
+**[Explore the system](../docs/rep-empowerment.md)** · [Inspect n8n JSON](../workflows/rep-empowerment-demo.json)
+
+An incoming intent signal leads to contact research, engagement and role-based scoring, and three routes:
+
+- **High priority:** Build a rep briefing with relevant talking points, outreach drafts, proof and a contact plan.
+- **Developing interest:** Enter a lighter nurture path, with promotion when engagement crosses a threshold.
+- **Lower priority:** Prepare a segment for paid retargeting and continued awareness.
+
+## Closed-Lost Reactivation
+
+**[Explore the architecture](../docs/reactivation.md)** · [Inspect n8n JSON](../workflows/closed-lost-reactivation-architecture.json)
+
+An opportunity-recovery system based on **what has changed since a deal was lost**. The design combines loss reason, timing, new-hire and expansion signals, contact resolution and coordinated reactivation.
 
 ```mermaid
-flowchart TD
- A[Account intent or dormant opportunity] --> B[Assess context and eligibility]
- B --> C[Enrich or resolve contact]
- C --> D{Rule-based decision}
- D --> E[Rep packet and handoff]
- D --> F[Nurture or reevaluation]
- D --> G[Do not activate]
+flowchart LR
+ A["New intent / changed account context"] --> B["Account + contact evaluation"]
+ B --> C["Qualification and routing"]
+ C --> D["Relevant sales action"]
 ```
 
-### How to review
-
-Start with [Rep Empowerment's scoring and routing](../docs/rep-empowerment.md) for executable-style logic, then review [Reactivation](../docs/reactivation.md) as a more conceptual multi-system architecture.
-
-**Implementation status:** Inactive prototypes with synthetic data, mock integrations, disabled HTTP targets and known incomplete mappings. They are not evidence of deployed AI SDR infrastructure or campaign results.
+These are early workflow examples with synthetic inputs and some simulated external steps, shared to illustrate their logic and architecture.
 
 [← Portfolio home](../README.md)
