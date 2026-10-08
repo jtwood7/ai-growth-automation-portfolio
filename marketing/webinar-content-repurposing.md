@@ -1,31 +1,39 @@
-# Webinar Content Repurposing
+# Webinar-to-Campaign Content System
 
-**Portfolio category:** Marketing · Content operations  
-**Source catalog entry:** Repurpose Webinar Content  
-**Status:** Documented AI assistant design from an internal tool directory. No enterprise GPT configuration, reference documents, credential access or runnable implementation is included.
+**Function:** Content strategy, lifecycle demand generation and asset reuse  
+**Source basis:** Repurpose Webinar Content tool card  
+**Artifact type:** Documented transcript-based workflow
 
-## Purpose
-Blog outlines, emails, social posts, quotes, FAQs, carousel and clip ideas.
+## The operational challenge
 
-## Workflow concept
+A live webinar often receives substantial production investment, but the ideas, customer language and supporting insights disappear after the broadcast. This assistant is designed to **turn one long-form source asset into a coordinated content library** while preserving what was actually said.
+
+## Workflow
+
 ```mermaid
-flowchart LR
- A["Define input and audience"] --> B["Validate approved facts / context"]
- B --> C["Apply task-specific rules"]
- C --> D["Generate structured deliverables"]
- D --> E["Human review"]
+flowchart TD
+ A["Webinar transcript"] --> B["Extract themes, insights, quotes and audience needs"]
+ B --> C["Identify voice-of-customer language"]
+ C --> D["Map insights to channels / content formats"]
+ D --> E["Draft derivative assets"]
+ E --> F["Fact, quotation and compliance QA"]
+ F --> G["Blog, email, social, SEO and video editorial handoff"]
 ```
 
-## Inputs
-Webinar transcript and formatting or compliance constraints.
+### Content package described in the tool card
 
-## Documented output
-Blog outlines, emails, social posts, quotes, FAQs, carousel and clip ideas.
+- **Editorial:** Two blog post outlines, actionable tips guide and SEO-focused FAQ section
+- **Lifecycle / demand generation:** Two marketing emails
+- **Social:** Five LinkedIn posts, LinkedIn carousel script and employee advocacy posts
+- **Proof and narrative:** Highlighted quotes and voice-of-the-customer analysis
+- **Video team:** Suggested clips and moments to cut from the original recording, **not produced video files**
 
-## What the design emphasizes
-Repurposing source material into multiple formats; clips are proposed, not produced media files.
+### Operating value
 
-## Implementation and evidence boundaries
-This case study summarizes a catalog description, rather than reproducing proprietary system instructions or knowledge files. It does not independently demonstrate that the original assistant ran successfully, was integrated into marketing systems, or improved campaign performance. Actual prompts, files and outcomes have not been supplied for public reproduction.
+Instead of asking separate teams to watch a full session and rediscover its strongest points, the assistant structures the webinar's source material into a reusable inventory of themes, customer language and format-specific briefs. It creates a more consistent path from a one-time event to ongoing search, nurture and social distribution.
 
-[← Marketing index](README.md) · [← Portfolio home](../README.md)
+All substantive output is intended to remain grounded in the transcript; the described rules prohibit fabricated facts, exaggerated claims, PHI and medical advice.
+
+**How to evaluate:** Asset utilization per webinar, turnaround time, editorial correction rate, content engagement and downstream campaign contribution. No results are asserted without supporting usage records.
+
+[← Marketing portfolio](README.md)
