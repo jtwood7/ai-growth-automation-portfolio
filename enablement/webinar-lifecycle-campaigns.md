@@ -1,42 +1,41 @@
-# Webinar Lifecycle Campaigns
+# Segmented Webinar Lifecycle Campaign Assistant
 
-**Portfolio adaptation of:** “Webinar Email Promotions” in the AI Tool Library  
-**Category:** Demand generation / campaign enablement  
-**Artifact status:** Documented design, not a working GPT export
+**Function:** Webinar demand generation, campaign operations and nurture strategy  
+**Source basis:** Webinar Email Promotions tool card  
+**Artifact type:** Documented assistant design
 
-## Business problem
-Webinar follow-up demands consistent pre-event promotion while recognizing that attendees, no-shows and non-registrants need different messaging afterward.
+## Problem
 
-## Workflow model
+A webinar is a multi-stage lifecycle program. The message that wins a registration is different from what an attendee, no-show or non-registrant should receive afterward. Rebuilding every message individually increases handoff overhead and can create inconsistent offers.
+
+## Designed workflow
+
 ```mermaid
 flowchart TD
- A[Webinar brief and supporting facts] --> B[Validate dates, speakers and CTA]
- B --> C[Campaign-specific style / structure rules]
- C --> D[Three pre-event email drafts]
- C --> E[Attendee post-event follow-up]
- C --> F[No-show on-demand follow-up]
- C --> G[Non-registrant on-demand angle]
- D --> H[Review copy + segmentation]
- E --> H
- F --> H
- G --> H
+ A["Webinar brief / source assets / registration URL"] --> B["Extract facts, speakers and takeaways"]
+ B --> C["Apply approved tone, CTA and email structure"]
+ C --> D["Pre-event message arc"]
+ D --> E["3 pre-event drafts: announce / value / last chance"]
+ C --> F["Post-event audience split"]
+ F --> G["Attendee: next step"]
+ F --> H["No-show: on-demand recap"]
+ F --> I["Non-registrant: new hook"]
+ E --> J["Six-email campaign package + review"]
+ G --> J
+ H --> J
+ I --> J
 ```
 
-## Input contract
-- Webinar description, audience, dates, speakers, takeaways and relevant URLs
-- Approved tone and layout rules, **not distributed here**
-- Optional on-demand information for post-event campaigns
+## What it actually delivers
 
-## Expected outputs
-**Exactly six email drafts:** three pre-event and three segment-specific post-event versions. Each follows a consistent output structure (subject, preview, body, CTA and standard sections).
+A **six-email package** from a single webinar brief, URL or supporting document, with three coordinated pre-event messages and three post-event audience-specific messages. Each uses an exact output structure with subject line, preview text, body, three bullets, CTA and a standard module. The tool card specifies a narrative arc and audience-specific CTA handling, including on-demand links.
 
-## Design decisions / safeguards
-- Enforce a defined content contract to reduce variation between campaigns.
-- Do not invent event dates, speaker details or performance proof.
-- Clearly mark unresolved inputs for human confirmation.
-- Distinguish drafted campaign content from **actual marketing automation**: audience selection, scheduling and email sends are not demonstrated by the GPT catalog.
+## Operational value
 
-## What this demonstrates
-Repeatable content operations, persona and lifecycle segmentation, structured generation and marketing quality controls.
+The benefit is **standardized lifecycle coverage and cleaner campaign production**: field/content teams supply a common brief, demand generation gets a consistent sequence, and the post-event variations have a clear rationale based on recipient behavior. This creates reusable campaign logic rather than six isolated pieces of writing.
 
-[← AI enablement index](README.md)
+The source catalog describes **draft generation only**. It does not show event registration tracking, audience segmentation inside a marketing automation platform, triggered sends or campaign performance.
+
+**Suggested evaluation:** Time from webinar brief to approved lifecycle package, changes required before launch, audience-specific conversion rate and influenced pipeline measured downstream.
+
+[← Marketing portfolio](../marketing/README.md)
