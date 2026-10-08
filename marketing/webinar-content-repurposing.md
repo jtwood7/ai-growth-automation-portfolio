@@ -18,7 +18,7 @@ flowchart TD
  F --> G["Blog, email, social, SEO and video editorial handoff"]
 ```
 
-### Content package described in the tool card
+### Reusable content package
 
 - **Editorial:** Two blog post outlines, actionable tips guide and SEO-focused FAQ section
 - **Lifecycle / demand generation:** Two marketing emails
