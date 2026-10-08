@@ -1,31 +1,29 @@
 # Evidence-Based Vendor Comparison
 
-**Portfolio category:** Sales · Solutions / competitive intelligence  
-**Source catalog entry:** RFP vendor comparisons  
-**Status:** Documented AI assistant design from an internal tool directory. No enterprise GPT configuration, reference documents, credential access or runnable implementation is included.
+**Function:** Competitive intelligence, sales strategy and RFP analysis.
 
-## Purpose
-Facet-by-facet vendor comparison with sourced insights and confidence.
+## The challenge
 
-## Workflow concept
+When multiple vendors respond to the same request, sales teams need to understand the **meaningful differences behind the language**, while keeping every comparison tied to a source.
+
+## Workflow
+
 ```mermaid
-flowchart LR
- A["Define input and audience"] --> B["Validate approved facts / context"]
- B --> C["Apply task-specific rules"]
- C --> D["Generate structured deliverables"]
- D --> E["Human review"]
+flowchart TD
+ A["Baseline proposal and competitor responses"] --> B["Identify comparable categories"]
+ B --> C["Extract capabilities and constraints per vendor"]
+ C --> D["Trace claims to supporting response sections"]
+ D --> E["Compare strengths, gaps and open questions"]
+ E --> F["Sales-ready comparison and review"]
 ```
 
-## Inputs
-Uploaded baseline RFP response and competitor responses.
+## Core capabilities
 
-## Documented output
-Facet-by-facet vendor comparison with sourced insights and confidence.
+- **Structured comparison:** Evaluate each response on shared dimensions instead of comparing documents line by line.
+- **Source traceability:** Preserve the supporting passage for each major comparison.
+- **Commercial relevance:** Distill the strongest differentiators, potential objections and clarification questions.
+- **Confidence-aware analysis:** Distinguish directly supported differences from information requiring further validation.
 
-## What the design emphasizes
-Evidence comparison rather than unsupported competitor assertions; no live competitor data.
+**Value to the team:** Faster, more disciplined competitive preparation for proposal reviews and account conversations.
 
-## Implementation and evidence boundaries
-This case study summarizes a catalog description, rather than reproducing proprietary system instructions or knowledge files. It does not independently demonstrate that the original assistant ran successfully, was integrated into marketing systems, or improved campaign performance. Actual prompts, files and outcomes have not been supplied for public reproduction.
-
-[← Sales index](README.md) · [← Portfolio home](../README.md)
+[← Sales systems](README.md)
