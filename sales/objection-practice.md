@@ -1,31 +1,28 @@
 # Competitive Objection Practice
 
-**Portfolio category:** Sales · Enablement  
-**Source catalog entry:** Competitive role-play assistant  
-**Status:** Documented AI assistant design from an internal tool directory. No enterprise GPT configuration, reference documents, credential access or runnable implementation is included.
+**Function:** Seller coaching and competitive enablement.
 
-## Purpose
-Simulated employee-facing conversations for objection practice.
+## The challenge
 
-## Workflow concept
+Reps often learn the best responses to objections through experience, after a difficult sales conversation. Scenario-based practice offers a more repeatable way to prepare before the meeting.
+
+## Workflow
+
 ```mermaid
 flowchart LR
- A["Define input and audience"] --> B["Validate approved facts / context"]
- B --> C["Apply task-specific rules"]
- C --> D["Generate structured deliverables"]
- D --> E["Human review"]
+ A["Competitive sales scenario"] --> B["Present realistic objection"]
+ B --> C["Rep responds"]
+ C --> D["Scenario-based counterpoint"]
+ D --> E["Refine positioning and response"]
 ```
 
-## Inputs
-Competitive scenario and internal objection context.
+## Core capabilities
 
-## Documented output
-Simulated employee-facing conversations for objection practice.
+- **Repeatable role-play:** Practice likely competitive pushback in a consistent environment.
+- **Messaging reinforcement:** Build familiarity with positioning and approved value arguments.
+- **Conversation readiness:** Help reps turn an objection into a productive discovery question.
+- **Training flexibility:** Revisit objections across different seller experience levels and account contexts.
 
-## What the design emphasizes
-Scenario simulation only; not live buyer sentiment or verified competitive assessment.
+**Value to the team:** More consistent objection practice and better access to competitive positioning between formal enablement sessions.
 
-## Implementation and evidence boundaries
-This case study summarizes a catalog description, rather than reproducing proprietary system instructions or knowledge files. It does not independently demonstrate that the original assistant ran successfully, was integrated into marketing systems, or improved campaign performance. Actual prompts, files and outcomes have not been supplied for public reproduction.
-
-[← Sales index](README.md) · [← Portfolio home](../README.md)
+[← Sales systems](README.md)
