@@ -3,9 +3,9 @@
 **Revive dormant opportunities when a meaningful buying condition changes.**
 
 
-## Full campaign presentation · 38 slides
+## Full campaign architecture · 38 slides
 
-The complete **Wake the Dead** campaign deck is available below, including the signal framework, Clay architecture, contact verification, AI reasoning, gifting sequence, rep handoff, reporting and technical appendix. No slides have been shortened or omitted.
+The complete **Wake the Dead** campaign deck is available below, including the signal framework, Clay architecture, contact verification, AI reasoning, gifting sequence, rep handoff, reporting and technical appendix. 
 
 **[Open the full 38-slide presentation](https://docs.google.com/presentation/d/1drJXUSyPldEuzAOHPYU0H4OzSgr6lbR6QMccOOud44Q/preview)**
 
