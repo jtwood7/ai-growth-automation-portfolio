@@ -1,36 +1,40 @@
-# 02 / Closed-Lost Reactivation Architecture
+# Closed-Lost Reactivation System
 
-**Status:** Inactive architecture prototype with incomplete provider configuration and deliberately disabled external HTTP destinations. Not an executed campaign.
+**Revive dormant opportunities when a meaningful buying condition changes.**
+
+## The problem
+
+A closed-lost deal is not necessarily a permanently lost account. Timing, investment approval, leadership changes or expansion can make an earlier conversation newly relevant. The challenge is to find the right accounts without sending generic "checking in" messages.
+
+## System flow
 
 ```mermaid
 flowchart TD
-    A[Daily check of closed-lost pool] --> B[Minimum 60 days since loss]
-    B --> C{Closed-lost reason}
-    C -->|Budget| D[Illustrative 9-11 month budget proxy]
-    C -->|Timing| E[Proposed expansion signal lookup]
-    D --> F[Contact resolution]
-    E --> F
-    F --> G{Existing or replacement contact?}
-    G --> H[Verify contact and address]
-    H --> I{Verified?}
-    I -->|No| J[Stop / proposed recycle]
-    I -->|Yes| K[CRM and call context]
-    K --> L[AI copy step placeholder]
-    L --> M[Proposed gifting and outreach sequence]
-    M --> N[Proposed rep handoff]
+ A["Closed-lost opportunities"] --> B["Minimum cooling period"]
+ B --> C{"Previous loss reason"}
+ C -->|Budget| D["Budget-cycle signal"]
+ C -->|Timing| E["Capital investment or expansion"]
+ D --> F["Resolve relevant contact"]
+ E --> F
+ F --> G["Check new decision-maker signal"]
+ G --> H["Verify person + address"]
+ H --> I["Pull prior deal and conversation context"]
+ I --> J["Tailor reactivation message and next steps"]
+ J --> K["Gift / sequence / rep handoff"]
 ```
 
-## Intent
-Reactivate closed-lost manufacturing accounts only when a meaningful change suggests the earlier obstacle may have shifted. The model separates eligibility, new signals, contact quality and outreach orchestration.
+## How the decisions work
 
-## Boundaries
+**Eligibility:** The sample starts with a 60-day floor before reconsidering a closed-lost opportunity.
 
-- CRM stage and closed-lost-reason filters need real field mappings.
-- A budget-cycle proxy is not proof of an approved purchasing budget.
-- Expansion/new-hire lookups were designed against illustrative provider routes, not tested endpoints.
-- Employment and address verification are proposed safety gates, not proof of live checks.
-- The AI step produces literal placeholder strings; **no LLM is invoked**.
-- Gifting, sequence enrollment, and downstream rep updates require integration, consent and spend controls.
-- Event ordering, deduplication, branch reconciliation, error handling and delivery correlation remain engineering tasks.
+**Trigger selection:** A budget-related loss enters a 9–11 month planning-window proxy. Timing-related losses are assessed against expansion or capital-investment activity. A new person in a decision-making role is an additional change signal.
 
-[Back to overview](../README.md) · [Implementation notes](technical-notes.md)
+**Contact resolution:** The design checks whether the original buyer is still relevant, or whether a successor or newly hired stakeholder needs to be found. Enrichment and address verification are used as pre-send checks.
+
+**Activation:** The proposed handoff brings together loss reason, prior deal context, conversation insights, personalized messaging, gifting and outbound follow-up.
+
+## The bigger idea
+
+This is **signal-led pipeline recycling**: spend acquisition effort when an account's circumstances have changed and provide the rep with the reason to re-engage. The n8n file captures the early architecture, including placeholder provider integrations and an illustrative AI-copy stage.
+
+[Inspect architecture JSON](../workflows/closed-lost-reactivation-architecture.json) · [← Acquisition systems](../acquisition/README.md)
