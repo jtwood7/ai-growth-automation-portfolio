@@ -1,8 +1,6 @@
 # Employee Advocacy Distribution Assistant
 
 **Function:** Social amplification and distributed content operations  
-**Source basis:** Advocacy Post Generator tool card  
-**Documented design:** Four controlled, employee-ready versions of a campaign asset
 
 ## Problem
 
@@ -31,8 +29,8 @@ The tool card specifies limits on hashtags/emojis and format-specific structure.
 
 **Make earned content more reusable across employee channels** by providing consistent, evidence-checked starting points without asking each person to rewrite the resource from scratch. The employee still owns the judgment to edit and post.
 
-**Scope:** Structured draft preparation, not automatic social publication, employee engagement tracking or measured advocacy reach.
+Teams can evaluate adoption, referral traffic and engagement as they roll out the program.
 
-**Suggested evaluation:** Asset-to-post turnaround time, adoption by participating employees and measured referral traffic or engagement.
+**Performance measures:** Asset-to-post turnaround time, adoption by participating employees and measured referral traffic or engagement.
 
 [← Marketing portfolio](README.md)
