@@ -1,8 +1,6 @@
 # Knowledge-Grounded Product Marketing Assistants
 
 **Function:** Product marketing, sales enablement and cross-channel messaging consistency  
-**Source basis:** Five product-specific assistants from the Tool Library  
-**Documented design:** A repeatable approach across distinct product lines, each grounded in its own approved knowledge
 
 ## The operating problem
 
@@ -32,12 +30,12 @@ The differentiation is not the fact that each tool can generate an email. It is 
 - **Sales enablement:** Provide talking points and objection responses connected to approved knowledge rather than improvised claims.
 - **Governance:** Avoid invented features, numerical outcomes and unsupported competitor weaknesses; flag gaps when source material is insufficient.
 
-### Value and boundaries
+### Value across the GTM organization
 
 This is a **knowledge-management and messaging consistency pattern across product lines**. It reduces the need for every marketer to reconstruct source context for each project, while offering a more controlled starting point for campaign work.
 
-The portfolio intentionally does not distribute the original five knowledge bases, assistant configurations or competitive material. It also does not establish usage, adoption or time savings without separate evidence.
+The repeated assistant pattern creates a consistent way to apply product knowledge across teams, channels and different launch needs.
 
-**Suggested evaluation:** Accuracy reviews, consistency across channels, revision cycles, field adoption and time to launch new product campaigns.
+**Performance measures:** Accuracy reviews, consistency across channels, revision cycles, field adoption and time to launch new product campaigns.
 
 [← Marketing portfolio](README.md)
