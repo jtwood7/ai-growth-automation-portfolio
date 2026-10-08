@@ -1,8 +1,6 @@
 # Signal-Led BDR Research
 
-**Portfolio adaptation of:** “BDR Outreach Assistant (Account Research)” in the AI Tool Library  
-**Category:** Sales prospecting / evidence-based personalization  
-**Artifact status:** Documented design, not a working GPT export
+**Function:** Sales prospecting / evidence-based personalization  
 
 ## Business problem
 BDR personalization is often either generic or overconfident. The assistant is designed to identify **recent, attributable account signals**, connect them to plausible business pains and create a short, evidence-backed opening email.
@@ -21,7 +19,7 @@ flowchart TD
 ## Input contract
 - Account and target role or persona
 - Current public-source access for time-sensitive facts
-- Approved product facts and approved proof library, **not** supplied in this repository
+- Approved product facts and approved proof library
 
 ## Expected outputs
 - Concise outreach email with a relevant reason to reach out
@@ -34,7 +32,7 @@ flowchart TD
 - Distinguish a researched signal from an **inferred** business problem.
 - Use a single clear meeting ask; no hard-coded or undisclosed private data.
 
-## What this demonstrates
-A practical signal → hypothesis → proof → messaging pipeline. **No real-time scraping, CRM integration or successful delivery is demonstrated by the uploaded catalog.**
+## GTM value
 
-[← AI enablement index](README.md)
+Connects the reason to reach out with public evidence, likely buyer priorities and relevant customer proof. This gives BDRs a **structured, signal-led research process** rather than relying on generic personalization.
+[← Sales systems](../sales/README.md)
