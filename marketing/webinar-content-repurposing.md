@@ -1,8 +1,6 @@
 # Webinar-to-Campaign Content System
 
 **Function:** Content strategy, lifecycle demand generation and asset reuse  
-**Source basis:** Repurpose Webinar Content tool card  
-**Artifact type:** Documented transcript-based workflow
 
 ## The operational challenge
 
@@ -26,7 +24,7 @@ flowchart TD
 - **Lifecycle / demand generation:** Two marketing emails
 - **Social:** Five LinkedIn posts, LinkedIn carousel script and employee advocacy posts
 - **Proof and narrative:** Highlighted quotes and voice-of-the-customer analysis
-- **Video team:** Suggested clips and moments to cut from the original recording, **not produced video files**
+- **Video team:** suggested source-recording moments for the video team
 
 ### Operating value
 
@@ -34,6 +32,6 @@ Instead of asking separate teams to watch a full session and rediscover its stro
 
 All substantive output is intended to remain grounded in the transcript; the described rules prohibit fabricated facts, exaggerated claims, PHI and medical advice.
 
-**How to evaluate:** Asset utilization per webinar, turnaround time, editorial correction rate, content engagement and downstream campaign contribution. No results are asserted without supporting usage records.
+**Performance measures:** Asset utilization per webinar, turnaround time, editorial correction rate, content engagement and downstream campaign contribution. No results are asserted without supporting usage records.
 
 [← Marketing portfolio](README.md)
