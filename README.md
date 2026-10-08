@@ -1,56 +1,52 @@
 # AI Growth & GTM Systems Portfolio
 
-**Building repeatable systems across B2B marketing, sales enablement and acquisition.**
+**Building AI-enabled systems that help marketing and sales teams execute faster, more consistently, and with better context.**
 
-This portfolio documents AI assistant designs from an internal tool library alongside two independently reviewable, synthetic n8n prototypes. It focuses on the **marketing or sales problem, the system logic, and the deliverables teams use to execute**, rather than a catalog of generated copy.
+A selection of projects I've designed across demand generation, content operations, campaign execution, sales enablement, and acquisition automation.
 
-> **Scope:** The assistant case studies are documented designs, not exported GPTs. The n8n workflows are inactive technical prototypes with mock or disabled integrations. Actual production outputs, adoption and business outcomes are not claimed without supporting evidence.
+*These examples represent earlier builds. The tool library has continued to evolve based on user feedback and changing GTM needs, with agentic capabilities added to selected tools.*
 
-## Choose a track
+## Explore by function
 
-| Area | What it demonstrates | Start with |
+| Area | What's inside | Jump in |
 |---|---|---|
-| **[Marketing AI Systems](marketing/README.md)** | Search content production, conversion design, paid acquisition creative, cross-channel campaigns, product knowledge and asset distribution | [GEO + SEO Publishing Package](marketing/geo-seo-content.md) |
-| **[Sales AI Enablement](sales/README.md)** | Account intelligence, evidence-grounded prospecting, persona mapping, source-backed sales proof and proposals | [Account Strategy Copilot](enablement/account-strategy-copilot.md) |
-| **[Acquisition Automation](acquisition/README.md)** | Intent and engagement signals, deterministic scoring, conditional routing, contact resolution and proposed outbound handoffs | [Rep Empowerment Engine](docs/rep-empowerment.md) |
+| **[Marketing systems](marketing/README.md)** | GEO/SEO publishing, conversion-page development, trade show activation, product messaging, paid media and content operations | [Explore marketing](marketing/README.md) |
+| **[Sales enablement](sales/README.md)** | Account research, buying signals, personalized outreach, evidence retrieval, RFPs and objection handling | [Explore sales](sales/README.md) |
+| **[Acquisition automation](acquisition/README.md)** | Intent-triggered prospecting, contact scoring, routing and closed-lost reactivation | [Explore workflows](acquisition/README.md) |
 
-## Selected projects worth a deeper look
+## Featured work
 
-### 01 · Organic acquisition from brief to web-team handoff
-**[GEO + SEO Content Production System](marketing/geo-seo-content.md)**
+### 01 · Content strategy to web-ready production
+**[GEO + SEO Content System](marketing/geo-seo-content.md)**
 
-An editorial workflow with five controlled post structures, freshness and citation policy, QA checks and a complete **web publishing package**: article, SEO title, meta description, URL slug, Open Graph content, internal links and outbound references. The value is a more complete, governed content-to-web handoff, not merely a blog draft.
+Selects a content architecture based on search intent, applies sourcing and editorial standards, develops the article, and assembles a complete **publishing package** for the web team: SEO title, meta description, slug, Open Graph metadata, internal links, outbound sources and QA checklist.
 
-### 02 · Conference GTM across marketing and sales
-**[Trade Show GTM Campaign Orchestration](marketing/trade-show-campaigns.md)**
+### 02 · Coordinated field marketing execution
+**[Trade Show GTM Campaign System](marketing/trade-show-campaigns.md)**
 
-A conference brief is translated into coordinated pre-/post-event emails, meeting-booking landing-page content, three-step BDR sequences, AE templates and campaign QA. The distinctive design is **cross-team messaging consistency** from a shared event and buyer strategy.
+Converts one event brief into a coordinated, cross-functional campaign: pre-/post-event promotion, a meeting-booking landing page, BDR sequences, AE outreach and follow-up. Shared context and approved proof keep the team aligned.
 
-### 03 · Conversion design with bounded requirements
-**[Conversion Landing-Page System](marketing/landing-page-architecture.md)**
+### 03 · Conversion strategy to design handoff
+**[Landing Page Architecture Assistant](marketing/landing-page-architecture.md)**
 
-XML-governed module selection, strategy questions, authoritative source PDFs, page wireframe and copy, missing-asset map, review loop and visual preview. Built to connect campaign goals with design and web execution.
+Uses campaign goals and source materials to select approved page modules, develop a conversion-oriented wireframe, identify missing proof and creative assets, and provide a visual preview for stakeholder review.
 
-### 04 · Signal-driven acquisition logic
+### 04 · Sales and marketing intelligence to action
 **[Rep Empowerment Engine](docs/rep-empowerment.md)**
 
-A **22-node synthetic n8n prototype** illustrating intent signals, mock enrichment, weighted scoring and three-tier contact routing, with example rep-preparation outputs. [Inspect the JSON](workflows/rep-empowerment-demo.json).
+An n8n example translating intent and engagement signals into contact enrichment, weighted scoring, tier-based next steps and a rep-ready research package. [Explore workflow structure](workflows/rep-empowerment-demo.json).
 
-### 05 · Evidence-grounded seller assistance
-**[Account Strategy Copilot](enablement/account-strategy-copilot.md)** and **[Evidence-Grounded Messaging](enablement/evidence-grounded-messaging.md)**
+### 05 · Source-backed seller enablement
+**[Account Strategy Copilot](enablement/account-strategy-copilot.md)** · **[Evidence-Grounded Messaging](enablement/evidence-grounded-messaging.md)** · **[RFP Response Assistant](enablement/source-grounded-rfp-responses.md)**
 
-A set of designs connecting external company research, internal approved case studies, buyer priorities and source-traceable sales messaging.
+Research-to-outreach workflows, traceable customer proof and structured response generation help sellers work from stronger account context and approved evidence.
 
-## More work by function
+## More examples
 
-- **[Marketing systems directory](marketing/README.md):** Paid media, LinkedIn creative, GEO/SEO, conversion, webinar lifecycle and repurposing, field marketing, employee advocacy and product marketing.
-- **[Sales systems directory](sales/README.md):** BDR research, personalized outreach, objections, case-study proof, RFP assistance and competitive comparisons.
-- **[Acquisition systems directory](acquisition/README.md):** Rep Empowerment and the proposed [Closed-Lost Reactivation Architecture](docs/reactivation.md).
+**Marketing:** [Paid media](marketing/paid-search-copy.md) · [LinkedIn creative](marketing/linkedin-ad-creative.md) · [Webinar lifecycle](enablement/webinar-lifecycle-campaigns.md) · [Webinar repurposing](marketing/webinar-content-repurposing.md) · [Product messaging](marketing/product-messaging-system.md) · [Employee advocacy](marketing/employee-advocacy.md)
 
-## Technical evidence and boundaries
+**Sales:** [Signal-led BDR research](enablement/signal-led-bdr-research.md) · [Persona-based outreach](sales/role-tailored-outreach.md) · [Competitive analysis](sales/competitive-rfp-analysis.md) · [Objection practice](sales/objection-practice.md)
 
-- [n8n workflow exports](workflows) · [Import and implementation limitations](WORKFLOW-IMPORT-NOTES.md)
-- [Standalone synthetic scoring exercise](examples/scoring-demo.js) · [Technical notes](docs/technical-notes.md)
-- [Confidentiality and sharing checklist](SHARING-CHECKLIST.md)
+**Workflow architecture:** [Closed-Lost Reactivation](docs/reactivation.md) · [Inspect its n8n structure](workflows/closed-lost-reactivation-architecture.json)
 
-The documented assistants use custom knowledge and rules not distributed in this portfolio. The n8n exports are not evidence of live campaigns or tested integrations, and require additional engineering and rights review before deployment or external distribution.
+*Portfolio format:* The GPT examples are selected capability and design case studies. The n8n exports are illustrative workflow builds, with synthetic data and simulated integrations.
