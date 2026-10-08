@@ -1,8 +1,6 @@
 # Segmented Webinar Lifecycle Campaign Assistant
 
 **Function:** Webinar demand generation, campaign operations and nurture strategy  
-**Source basis:** Webinar Email Promotions tool card  
-**Artifact type:** Documented assistant design
 
 ## Problem
 
@@ -34,8 +32,8 @@ A **six-email package** from a single webinar brief, URL or supporting document,
 
 The benefit is **standardized lifecycle coverage and cleaner campaign production**: field/content teams supply a common brief, demand generation gets a consistent sequence, and the post-event variations have a clear rationale based on recipient behavior. This creates reusable campaign logic rather than six isolated pieces of writing.
 
-The source catalog describes **draft generation only**. It does not show event registration tracking, audience segmentation inside a marketing automation platform, triggered sends or campaign performance.
+This creates a consistent campaign handoff, with messaging logic tailored to each post-event audience segment.
 
-**Suggested evaluation:** Time from webinar brief to approved lifecycle package, changes required before launch, audience-specific conversion rate and influenced pipeline measured downstream.
+**Performance measures:** Time from webinar brief to approved lifecycle package, changes required before launch, audience-specific conversion rate and influenced pipeline measured downstream.
 
 [← Marketing portfolio](../marketing/README.md)
