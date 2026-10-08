@@ -1,52 +1,70 @@
-# AI Growth & GTM Systems Portfolio
+# AI Systems & Automation Portfolio
 
-**Building AI-enabled systems that help marketing and sales teams execute faster, more consistently, and with better context.**
+**Applied AI for growth, marketing operations, account intelligence, and sales enablement.**
 
-A selection of projects I've designed across demand generation, content operations, campaign execution, sales enablement, and acquisition automation.
+A collection of AI applications, multi-step workflows, and custom assistants I've designed and built. Projects are ordered by **technical and operational depth**, with the most involved systems first.
 
-*These examples represent earlier builds. The tool library has continued to evolve based on user feedback and changing GTM needs, with agentic capabilities added to selected tools.*
+*This is a selection of earlier builds. Several tools have since evolved through user feedback and changing business needs, including new agentic capabilities.*
 
-## Explore by function
+## Featured AI projects
 
-| Area | What's inside | Jump in |
-|---|---|---|
-| **[Marketing systems](marketing/README.md)** | GEO/SEO publishing, conversion-page development, trade show activation, product messaging, paid media and content operations | [Explore marketing](marketing/README.md) |
-| **[Sales enablement](sales/README.md)** | Account research, buying signals, personalized outreach, evidence retrieval, RFPs and objection handling | [Explore sales](sales/README.md) |
-| **[Acquisition automation](acquisition/README.md)** | Intent-triggered prospecting, contact scoring, routing and closed-lost reactivation | [Explore workflows](acquisition/README.md) |
+### 01 / [AI Prospecting Intelligence Platform](systems/ai-prospecting-intelligence.md)
+**Production application · Claude Code + Claude API · Railway · Google Sheets**
 
-## Featured work
+A deployed prospecting workflow that scans account signals, researches companies, synthesizes buying context, drafts personalized outreach, and recommends relevant sales assets. Results flow through a human approval step before sellers act.
 
-### 01 · Content strategy to web-ready production
-**[GEO + SEO Content System](marketing/geo-seo-content.md)**
+**Explore:** [Architecture and capabilities](systems/ai-prospecting-intelligence.md)
 
-Selects a content architecture based on search intent, applies sourcing and editorial standards, develops the article, and assembles a complete **publishing package** for the web team: SEO title, meta description, slug, Open Graph metadata, internal links, outbound sources and QA checklist.
+### 02 / [Wake the Dead: AI-Driven Opportunity Reactivation](docs/reactivation.md)
+**Multi-system orchestration design · Clay / AI reasoning / CRM / gifting / sales handoff**
 
-### 02 · Coordinated field marketing execution
-**[Trade Show GTM Campaign System](marketing/trade-show-campaigns.md)**
+A full closed-lost reactivation system: high-intent and supporting signal qualification, champion verification, analysis of past loss reasons, AI-written outreach, event-timed gifting, rep alerts, and funnel reporting.
 
-Converts one event brief into a coordinated, cross-functional campaign: pre-/post-event promotion, a meeting-booking landing page, BDR sequences, AE outreach and follow-up. Shared context and approved proof keep the team aligned.
+**Explore:** [Full 38-slide campaign and technical deck](docs/reactivation.md) · [n8n architecture sample](workflows/closed-lost-reactivation-architecture.json)
 
-### 03 · Conversion strategy to design handoff
-**[Landing Page Architecture Assistant](marketing/landing-page-architecture.md)**
+### 03 / [Rep Empowerment Engine](docs/rep-empowerment.md)
+**n8n workflow · Enrichment + scoring + tiered sales activation**
 
-Uses campaign goals and source materials to select approved page modules, develop a conversion-oriented wireframe, identify missing proof and creative assets, and provide a visual preview for stakeholder review.
+Converts account intent into prioritized contacts, rep talking points, personalized email/LinkedIn drafts, supporting evidence, and a follow-up plan. Includes conditional nurture and paid-audience routes.
 
-### 04 · Sales and marketing intelligence to action
-**[Rep Empowerment Engine](docs/rep-empowerment.md)**
+**Explore:** [Workflow walkthrough](docs/rep-empowerment.md) · [n8n sample](workflows/rep-empowerment-demo.json)
 
-An n8n example translating intent and engagement signals into contact enrichment, weighted scoring, tier-based next steps and a rep-ready research package. [Explore workflow structure](workflows/rep-empowerment-demo.json).
+### 04 / [AI RFP Response Assistant](enablement/source-grounded-rfp-responses.md)
+**Document understanding · Knowledge retrieval · Structured AI outputs**
 
-### 05 · Source-backed seller enablement
-**[Account Strategy Copilot](enablement/account-strategy-copilot.md)** · **[Evidence-Grounded Messaging](enablement/evidence-grounded-messaging.md)** · **[RFP Response Assistant](enablement/source-grounded-rfp-responses.md)**
+Extracts RFP questions, retrieves approved-source evidence, drafts answers, preserves question references and source citations, and flags gaps for review. A practical application of source-grounded AI to high-stakes proposal workflows.
 
-Research-to-outreach workflows, traceable customer proof and structured response generation help sellers work from stronger account context and approved evidence.
+**Explore:** [RFP response system](enablement/source-grounded-rfp-responses.md)
 
-## More examples
+### 05 / [GEO + SEO Content Production System](marketing/geo-seo-content.md)
+**AI content architecture · Source governance · Publishing automation handoff**
 
-**Marketing:** [Paid media](marketing/paid-search-copy.md) · [LinkedIn creative](marketing/linkedin-ad-creative.md) · [Webinar lifecycle](enablement/webinar-lifecycle-campaigns.md) · [Webinar repurposing](marketing/webinar-content-repurposing.md) · [Product messaging](marketing/product-messaging-system.md) · [Employee advocacy](marketing/employee-advocacy.md)
+Selects an editorial structure by search intent, develops source-grounded content, and creates the complete web-team package: SEO title, meta description, URL slug, Open Graph content, linking recommendations, and QA.
 
-**Sales:** [Signal-led BDR research](enablement/signal-led-bdr-research.md) · [Persona-based outreach](sales/role-tailored-outreach.md) · [Competitive analysis](sales/competitive-rfp-analysis.md) · [Objection practice](sales/objection-practice.md)
+**Explore:** [End-to-end content workflow](marketing/geo-seo-content.md)
 
-**Workflow architecture:** [Closed-Lost Reactivation](docs/reactivation.md) · [Inspect its n8n structure](workflows/closed-lost-reactivation-architecture.json)
+### 06 / [Conversion Landing Page Architecture Assistant](marketing/landing-page-architecture.md)
+**Structured rules · Source-grounded messaging · Visual design preview**
 
-*Portfolio format:* The GPT examples are selected capability and design case studies. The n8n exports are illustrative workflow builds, with synthetic data and simulated integrations.
+Turns a campaign brief and approved product materials into an intentional page architecture, wireframe, copy, conversion path, proof/asset requirements, and an iterative visual preview.
+
+**Explore:** [Landing page system](marketing/landing-page-architecture.md)
+
+## Additional AI capabilities
+
+| Area | Projects |
+|---|---|
+| **Knowledge-grounded sales AI** | [Account Strategy Copilot](enablement/account-strategy-copilot.md) · [Evidence-Grounded Messaging](enablement/evidence-grounded-messaging.md) · [Signal-Led BDR Research](enablement/signal-led-bdr-research.md) |
+| **Product and competitive intelligence** | [Product Knowledge Assistants](marketing/product-messaging-system.md) · [Vendor Comparison AI](sales/competitive-rfp-analysis.md) |
+| **Multi-asset campaign systems** | [Trade Show Campaign Orchestration](marketing/trade-show-campaigns.md) · [Webinar Repurposing](marketing/webinar-content-repurposing.md) · [Webinar Lifecycle](enablement/webinar-lifecycle-campaigns.md) |
+| **Channel execution assistants** | [LinkedIn Creative](marketing/linkedin-ad-creative.md) · [Paid Media Variants](marketing/paid-search-copy.md) · [Employee Advocacy](marketing/employee-advocacy.md) · [Role-Tailored Sales Outreach](sales/role-tailored-outreach.md) |
+
+## Browse the full portfolio
+
+**[Acquisition & AI workflows](acquisition/README.md)** · **[Marketing AI systems](marketing/README.md)** · **[Sales AI enablement](sales/README.md)**
+
+### What connects these projects
+
+Across different levels of complexity, the emphasis stays consistent: **reliable input data, bounded AI reasoning, explicit business logic, useful outputs, and integration into real GTM work.**
+
+The portfolio mixes a production AI application with workflow architecture examples and enterprise assistant designs. Technical exports and illustrative data are included selectively where they help explain a system.
