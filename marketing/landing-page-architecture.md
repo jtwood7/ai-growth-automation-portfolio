@@ -1,8 +1,6 @@
 # Conversion Landing-Page System
 
 **Function:** Conversion rate optimization, campaign production and design handoff  
-**Source basis:** Landing Page Generator tool card  
-**Artifact type:** Documented assistant design; not a hosted page builder
 
 ## The operational challenge
 
@@ -40,8 +38,8 @@ The assistant asks targeted questions about audience, offer and conversion goal,
 
 The intended value is **clearer campaign-to-web handoff**: marketing can provide a conversion hypothesis, copy, page architecture, form/CTA direction and a list of required assets in one package. Design and web teams can resolve missing dependencies earlier.
 
-The tool expressly uses placeholders where proof is missing. It prohibits invented results, testimonials and clinical claims. The preview is not evidence of a shipped, instrumented landing page.
+The tool expressly uses placeholders where proof is missing. It prohibits invented results, testimonials and clinical claims. 
 
-**Evaluation approach:** Brief-to-approved-wireframe time, late-stage asset requests, design revision cycles, form completion and post-launch conversion rates. These are suggested measures, not historical performance claims.
+**Performance measures:** Brief-to-approved-wireframe time, late-stage asset requests, design revision cycles, form completion and post-launch conversion rates. 
 
 [← Marketing portfolio](README.md)
