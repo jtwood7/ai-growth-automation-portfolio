@@ -1,8 +1,6 @@
 # Trade Show GTM Campaign Orchestration
 
 **Function:** Field marketing, demand generation and sales alignment  
-**Source basis:** Trade Show Collateral Generator tool card  
-**Artifact type:** Documented multi-asset campaign assistant
 
 ## The operational challenge
 
@@ -37,8 +35,6 @@ The assistant can extract dates, place and themes from a **show URL**, reconcile
 
 The objective is **launch coordination at scale**: one agreed audience and message architecture feeds the landing page, marketing emails, sales outreach and follow-up motions. The output makes the dependencies between teams visible earlier, while maintaining a consistent reason to book a meeting.
 
-This is campaign *assembly* and handoff, not proven live orchestration. It does not itself register attendees, segment CRM lists, send emails, book meetings or attribute pipeline.
-
-**Useful measurements:** Time to campaign launch, number of asset revisions, pre-event booked meetings, booth meetings held, post-event follow-up completion and sourced/influenced pipeline. These are measurement recommendations, not outcomes established by the tool card.
+**Performance measures:** Time to campaign launch, number of asset revisions, pre-event booked meetings, booth meetings held, post-event follow-up completion and sourced/influenced pipeline. 
 
 [← Marketing portfolio](README.md)
