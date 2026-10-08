@@ -1,8 +1,6 @@
 # Account Strategy Copilot
 
-**Portfolio adaptation of:** “Outreach Strategy Assistant” in the AI Tool Library  
-**Category:** Sales enablement / account-based prospecting  
-**Artifact status:** Documented design, not a working GPT export
+**Function:** Sales enablement / account-based prospecting  
 
 ## Business problem
 Preparing a relevant first conversation requires a current account brief, plausible buying-committee coverage, role-specific strategy and outreach. Those deliverables are often built in separate steps and lose context between handoffs.
@@ -35,7 +33,7 @@ flowchart TD
 - Preserve unresolved placeholders in outreach rather than inserting unsupported facts.
 - Maintain a stable output sequence so an AE can review the package quickly.
 
-## What this demonstrates
-Task decomposition, research grounding, data contracts and seller-in-the-loop workflow design. The catalog documents the intended behavior; it does **not** prove that contact discovery, browsing and messaging all ran successfully in a single live session.
+## GTM value
 
-[← AI enablement index](README.md)
+Combines account research, stakeholder hypotheses, outreach strategy and template-led personalization into one seller-ready preparation workflow. The primary benefit is **better account context and less fragmented prep work** before prospecting begins.
+[← Sales systems](../sales/README.md)
