@@ -1,8 +1,6 @@
 # GEO + SEO Content Production System
 
 **Function:** Organic acquisition, editorial operations and web publishing  
-**Source basis:** GEO Blog Generator & Optimizer tool card  
-**Artifact type:** Documented assistant design; original internal instructions and source files are not distributed
 
 ## The operational challenge
 
@@ -39,9 +37,7 @@ The tool card specifies an explicit sourcing policy:
 - Flag unsupported claims as **[citation needed]** rather than inventing evidence when browsing is unavailable.
 - Work within the requested word count (±10%) and reading-level requirements.
 
-These are **designed rules**, not a claim that every real-world output has been independently audited.
-
-### 3. Publishing-ready deliverable set
+### 3. Publishing-ready handoff
 
 | Deliverable | What the downstream team receives |
 |---|---|
@@ -51,16 +47,12 @@ These are **designed rules**, not a claim that every real-world output has been 
 | **OUTBOUND_SOURCES** | Attributed, directly linked sources supporting cited claims |
 | **QA_CHECKLIST** | Pass/fail review of structural, sourcing, length and metadata requirements |
 
-**Web-team handoff:** The editor and web team receive the *content and the publishing metadata together*, rather than rebuilding the URL, SERP snippet, social-sharing copy and linking plan after writing is complete. The tool card specifies the fields above; it does not claim to implement CMS publication, canonical tags or live ranking measurement.
+**Web-team handoff:** The editor and web team receive the *content and the publishing metadata together*, rather than rebuilding the URL, SERP snippet, social-sharing copy and linking plan after writing is complete. 
 
 ## Business value and measurement
 
 **Designed leverage:** Reduce repetitive content-production and handoff work; create more consistent content structures; and make source verification, metadata completion and internal linking part of the process rather than downstream clean-up.
 
-**How to evaluate:** First-draft acceptance, time from brief to CMS-ready package, metadata completeness, citation/claim audit pass rate, editorial revisions and, after publishing, organic visibility, qualified traffic and conversions. *These are proposed evaluation measures, not reported results.*
-
-## Implementation boundary
-
-This page describes the documented workflow and requirements of an internal assistant. The original knowledge files (structure definitions, sourcing policy, selection heuristics), live browsing outputs and production performance data are not available in this repository.
+**Performance measures:** First-draft acceptance, time from brief to CMS-ready package, metadata completeness, citation/claim audit pass rate, editorial revisions and, after publishing, organic visibility, qualified traffic and conversions. 
 
 [← Marketing portfolio](README.md)
