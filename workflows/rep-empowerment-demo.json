@@ -1,0 +1,564 @@
+{
+  "name": "Rep Empowerment Engine (Synthetic Demo)",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Rep Empowerment Engine\nGoal: do the rep's homework before they ever pick up the phone, and make sure a warm lead never goes cold or gets lost in a channel.\n\nFlow: intent signal comes in → we check who we already know at the account → fill any gaps → score by real engagement + intent + role fit → route by tier. Tier 1 gets the full battle-pack, Tier 2 gets lighter nurture with a path back into Tier 1, Tier 3 just feeds paid targeting.",
+        "height": 280,
+        "width": 900,
+        "color": 4
+      },
+      "name": "Sticky: Overview",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2288,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "intent-signal",
+        "options": {}
+      },
+      "name": "New Intent Signal Detected",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        2208,
+        784
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// MOCK — stands in for a real HubSpot API call.\n// In production this looks up all known contacts for the account that fired the intent signal.\nconst account = {\n  accountName: \"Example Manufacturing Co.\",\n  accountId: \"ACC-10432\",\n  topic: \"Condition Monitoring\", // Condition Monitoring | Energy Insights | Operations Platform\n  intentSignalStrength: 82, // 0-100, from mock intent data provider\n};\n\nconst existingContacts = [\n  {\n    name: \"Avery Morgan\",\n    title: \"Reliability Engineer\",\n    email: \"dana.whitfield@example.com\",\n    engagementHistory: { emailOpens: 6, emailClicks: 3, siteVisits: 4, lastTouch: \"2026-07-14\" },\n  },\n  {\n    name: \"Jordan Lee\",\n    title: \"Maintenance Manager\",\n    email: \"marcus.ibe@example.com\",\n    engagementHistory: { emailOpens: 1, emailClicks: 0, siteVisits: 1, lastTouch: \"2026-06-02\" },\n  },\n  // Plant Manager is missing on purpose — that's the gap the next node fills.\n];\n\nreturn [{ json: { account, contacts: existingContacts } }];"
+      },
+      "name": "HubSpot: Existing Contacts (Mock)",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        2416,
+        784
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// MOCK — stands in for a Clay enrichment call.\n// Checks whether all 3 target roles exist at the account; mines a new contact for any that's missing.\nconst { account, contacts } = $input.first().json;\nconst requiredRoles = [\"Reliability Engineer\", \"Maintenance Manager\", \"Plant Manager\"];\nconst presentRoles = contacts.map(c => c.title);\nconst missingRoles = requiredRoles.filter(r => !presentRoles.includes(r));\n\nconst enriched = [...contacts];\n\nif (missingRoles.includes(\"Plant Manager\")) {\n  enriched.push({\n    name: \"Taylor Rivera\",\n    title: \"Plant Manager\",\n    email: \"renee.castillo@example.com\",\n    engagementHistory: { emailOpens: 0, emailClicks: 0, siteVisits: 0, lastTouch: null },\n    source: \"Clay enrichment — new contact, no engagement yet\",\n  });\n}\n\nreturn [{ json: { account, contacts: enriched, missingRolesFilled: missingRoles } }];"
+      },
+      "name": "Gap Check + Clay Enrichment (Mock)",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        2640,
+        784
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Scoring logic, plain language:\n// 1) Engagement history is the strongest signal — real behavior beats a title.\n// 2) Intent signal strength on the account adds points for everyone at that account.\n// 3) Role fit is a tiebreaker/boost, NOT a gate — a Plant Manager with zero engagement doesn't outrank an engaged Reliability Engineer.\nconst { account, contacts } = $input.first().json;\n\nconst roleWeight = {\n  \"Reliability Engineer\": 10,\n  \"Maintenance Manager\": 8,\n  \"Plant Manager\": 6,\n};\n\nconst scored = contacts.map(contact => {\n  const eng = contact.engagementHistory;\n  const engagementScore = (eng.emailOpens * 2) + (eng.emailClicks * 5) + (eng.siteVisits * 4);\n  const intentScore = account.intentSignalStrength * 0.3;\n  const roleFitScore = roleWeight[contact.title] || 5;\n  const totalScore = engagementScore + intentScore + roleFitScore;\n\n  let tier = 3;\n  if (totalScore >= 45) tier = 1;\n  else if (totalScore >= 20) tier = 2;\n\n  return {\n    json: {\n      account,\n      contact,\n      engagementScore,\n      intentScore,\n      roleFitScore,\n      totalScore,\n      tier,\n      engagementCount: eng.emailOpens + eng.emailClicks + eng.siteVisits,\n      promotionThreshold: 5,\n    }\n  };\n});\n\nreturn scored;"
+      },
+      "name": "Score Contacts",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        2864,
+        784
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.tier }}",
+                    "rightValue": 1,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Tier 1"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.tier }}",
+                    "rightValue": 2,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Tier 2"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.tier }}",
+                    "rightValue": 3,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Tier 3"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Route by Tier",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        3088,
+        784
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Tier 1 — Handle majority of rep workload and research before they begin outreach\nTalking points, drafted email + InMail, matched case study, and a day-by-day cadence.  All waiting before the rep makes contact.",
+        "width": 1360,
+        "color": 5
+      },
+      "name": "Sticky: Tier 1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3280,
+        336
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// MOCK — plain-language talking points, no jargon.\nconst { account, contact } = $json;\n\nconst painPointByTitle = {\n  \"Reliability Engineer\": \"unplanned downtime from bearing/motor failures they can't see coming\",\n  \"Maintenance Manager\": \"too much time firefighting instead of planning maintenance\",\n  \"Plant Manager\": \"unplanned downtime hitting the plant's throughput numbers\",\n};\n\nconst talkingPoints = [\n  `Open with the trigger: they've been actively looking into ${account.topic} — this isn't a cold call.`,\n  `Their likely pain: ${painPointByTitle[contact.title] || \"unplanned downtime and reactive maintenance\"}.`,\n  `What ${account.topic} does for them in one sentence: catches the failure before it takes down the line.`,\n  `Ask: \"What's driving the timing on this — is something already breaking, or are you getting ahead of it?\"`,\n];\n\nreturn [{ json: { ...$json, talkingPoints } }];"
+      },
+      "name": "Generate Phone Talking Points",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        3296,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const { account, contact } = $json;\nconst firstName = contact.name.split(\" \")[0];\n\nconst draftEmail = {\n  subject: `${firstName}, saw your team looking into ${account.topic}`,\n  body: `Hi ${firstName},\\n\\nNoticed ${account.accountName} has been looking into ${account.topic} recently. For a ${contact.title}, the reason that usually surfaces is unplanned downtime that's hard to catch early.\\n\\nWorth a 15-minute call to see if it's a fit?\\n\\n[Rep name]`,\n};\n\nconst draftInMail = {\n  subject: `Quick question on ${account.topic}`,\n  body: `Hi ${firstName} — saw the ${account.topic} research from ${account.accountName}. Happy to share how similar plants are using it if useful.`,\n};\n\nreturn [{ json: { ...$json, draftEmail, draftInMail } }];"
+      },
+      "name": "Draft Email + LinkedIn InMail",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        3520,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Match priority: industry first, product/pain-point as tie-breaker.\n// NOTE: these are real, published Industrial Automation Co. case studies (not fabricated) — swap in more as they're published.\nconst caseStudyLibrary = [\n  { industry: \"Steel\", product: \"Condition Monitoring\", title: \"Example Steel Customer cuts equipment vibration ~40% with preventive maintenance driven by Condition Monitoring data\", url: \"https://example.com/sample-case-study\" },\n  { industry: \"Manufacturing (Coatings)\", product: \"Condition Monitoring\", title: \"Example Coatings Customer prevents 564 hours of downtime and $150K in losses on powder coating line motors\", url: \"https://example.com/sample-case-study\" },\n  { industry: \"Chemical/Fertilizer\", product: \"Condition Monitoring\", title: \"Example Process Customer avoids a $69K+ loss by catching a faulty blower with AI-driven vibration monitoring\", url: \"https://example.com/sample-case-study\" },\n];\n\nconst accountIndustry = \"Steel\"; // mock account attribute\nconst matched = caseStudyLibrary.find(c => c.industry === accountIndustry && c.product === $json.account.topic)\n  || caseStudyLibrary.find(c => c.industry === accountIndustry)\n  || caseStudyLibrary[0];\n\nreturn [{ json: { ...$json, matchedCaseStudy: matched } }];"
+      },
+      "name": "Match Case Study",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        3744,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const cadencePlan = [\n  { day: 1, action: \"Call + send drafted email same day\" },\n  { day: 3, action: \"LinkedIn InMail if no response\" },\n  { day: 5, action: \"Second call attempt, reference case study\" },\n  { day: 8, action: \"Breakup email if still no response\" },\n];\n\nreturn [{ json: { ...$json, cadencePlan } }];"
+      },
+      "name": "Build Cadence Plan",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        3968,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// MOCK — stands in for a real Slack API call notifying the assigned rep.\nconst slackMessage = {\n  channel: \"#hot-leads\",\n  text: `\\uD83D\\uDD25 Tier 1 lead: ${$json.contact.name} (${$json.contact.title}) at ${$json.account.accountName} — score ${$json.totalScore}. Why: strong ${$json.account.topic} intent + real engagement. Full battle-pack: [link to HubSpot record]`,\n};\n\nreturn [{ json: { ...$json, slackMessage } }];"
+      },
+      "name": "Slack Notification (Mock)",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        4176,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// This is the system of record. Slack notifies the rep; HubSpot holds the full battle-pack.\nconst battlePack = {\n  account: $json.account.accountName,\n  contact: $json.contact.name,\n  title: $json.contact.title,\n  tier: 1,\n  score: $json.totalScore,\n  talkingPoints: $json.talkingPoints,\n  draftEmail: $json.draftEmail,\n  draftInMail: $json.draftInMail,\n  matchedCaseStudy: $json.matchedCaseStudy,\n  cadencePlan: $json.cadencePlan,\n  writtenTo: \"HubSpot record (system of record) — Slack notifies, HubSpot holds\",\n};\n\nreturn [{ json: { ...$json, hubspotBattlePack: battlePack } }];"
+      },
+      "name": "Write Battle-Pack to HubSpot (Mock)",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        4400,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Tier 2 — Lighter touch.  Same rep\nSo a warm lead never goes cold or gets forgotten in a channel — once engagement crosses the threshold, this contact routes straight back into the Tier 1 branch above, no manual re-triage needed.",
+        "height": 140,
+        "width": 900,
+        "color": 6
+      },
+      "name": "Sticky: Tier 2 Promotion Loop",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3296,
+        1168
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const firstName = $json.contact.name.split(\" \")[0];\nconst lightEmail = {\n  subject: `Quick resource on ${$json.account.topic}`,\n  body: `Hi ${firstName}, saw you looking into ${$json.account.topic} — sharing a quick resource in case it's useful. Let me know if you'd like to talk.`,\n};\n\nreturn [{ json: { ...$json, assignedRep: \"Same rep as account owner\", lightEmail } }];"
+      },
+      "name": "Assign Rep + Light Email (Mock)",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        3296,
+        992
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// MOCK — stands in for enrolling the contact in an Outreach-style sequence.\nreturn [{ json: { ...$json, sequence: \"Outreach-style nurture sequence — Step 1 sent (Mock)\" } }];"
+      },
+      "name": "Enroll in Sequence (Mock)",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        3520,
+        992
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// MOCK — simulates an inbound engagement event (open/click/visit) bumping the counter.\nconst simulatedNewEngagementEvents = 3;\nconst engagementCount = ($json.engagementCount || 0) + simulatedNewEngagementEvents;\n\nreturn [{ json: { ...$json, engagementCount } }];"
+      },
+      "name": "Increment Engagement Counter (Mock)",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        3744,
+        992
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.engagementCount }}",
+              "rightValue": "={{ $json.promotionThreshold }}",
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Check Promotion Threshold",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        3968,
+        992
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Promotion: engagement crossed the threshold — this contact re-enters the Tier 1 branch.\nreturn [{ json: { ...$json, tier: 1, promotedFrom: \"Tier 2\" } }];"
+      },
+      "name": "Promote to Tier 1 (Mock)",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        4192,
+        752
+      ]
+    },
+    {
+      "parameters": {},
+      "name": "Remain in Tier 2 Nurture",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        4288,
+        1008
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Tier 3 — Keep it lean.\nNot rep-facing. Just feeds an ad audience segment so the brand stays visible while the signal is weak.",
+        "width": 480,
+        "color": 3
+      },
+      "name": "Sticky: Tier 3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3504,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const audienceSegment = {\n  platform: \"LinkedIn Ads (Mock)\",\n  segmentName: `${$json.account.topic} - Tier 3 Nurture`,\n  accounts: [$json.account.accountName],\n  titles: [$json.contact.title],\n  targetingParameters: { industry: \"Manufacturing\", companySizeMin: 200, topic: $json.account.topic },\n};\n\nreturn [{ json: { ...$json, audienceSegment } }];"
+      },
+      "name": "Build Ad Audience Segment (Mock)",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        3296,
+        1488
+      ]
+    }
+  ],
+  "connections": {
+    "New Intent Signal Detected": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: Existing Contacts (Mock)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HubSpot: Existing Contacts (Mock)": {
+      "main": [
+        [
+          {
+            "node": "Gap Check + Clay Enrichment (Mock)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gap Check + Clay Enrichment (Mock)": {
+      "main": [
+        [
+          {
+            "node": "Score Contacts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Score Contacts": {
+      "main": [
+        [
+          {
+            "node": "Route by Tier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by Tier": {
+      "main": [
+        [
+          {
+            "node": "Generate Phone Talking Points",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Assign Rep + Light Email (Mock)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Ad Audience Segment (Mock)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Phone Talking Points": {
+      "main": [
+        [
+          {
+            "node": "Draft Email + LinkedIn InMail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Draft Email + LinkedIn InMail": {
+      "main": [
+        [
+          {
+            "node": "Match Case Study",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Match Case Study": {
+      "main": [
+        [
+          {
+            "node": "Build Cadence Plan",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Cadence Plan": {
+      "main": [
+        [
+          {
+            "node": "Slack Notification (Mock)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack Notification (Mock)": {
+      "main": [
+        [
+          {
+            "node": "Write Battle-Pack to HubSpot (Mock)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Assign Rep + Light Email (Mock)": {
+      "main": [
+        [
+          {
+            "node": "Enroll in Sequence (Mock)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enroll in Sequence (Mock)": {
+      "main": [
+        [
+          {
+            "node": "Increment Engagement Counter (Mock)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Increment Engagement Counter (Mock)": {
+      "main": [
+        [
+          {
+            "node": "Check Promotion Threshold",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Promotion Threshold": {
+      "main": [
+        [
+          {
+            "node": "Promote to Tier 1 (Mock)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Remain in Tier 2 Nurture",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Promote to Tier 1 (Mock)": {
+      "main": [
+        [
+          {
+            "node": "Generate Phone Talking Points",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": []
+}
