@@ -1,8 +1,6 @@
 # Landing-Page-Aligned LinkedIn Ad Assistant
 
 **Function:** Paid social, campaign conversion continuity  
-**Source basis:** LinkedIn Ad Assistant tool card  
-**Documented design:** Goal inference and structured ad-ready fields
 
 ## Problem
 
@@ -29,8 +27,8 @@ The tool card describes page analysis for offer type (webinar, report, demo, tri
 
 Its value is **ad-to-landing-page consistency** and a defined handoff to paid media production, rather than just producing attractive wording. It avoids invented metrics and is expected to handle inaccessible pages explicitly.
 
-**Scope:** One ad deliverable set from one page. No campaign deployment, pixel validation, funnel measurement or real-time ad optimization is demonstrated.
+The structured fields give the paid team a consistent package that can be reviewed for offer, CTA and creative alignment before launch.
 
-**Suggested evaluation:** Ad/page message-match review, revisions to approval, accessibility/field completeness and subsequent conversion metrics.
+**Performance measures:** Ad/page message-match review, revisions to approval, accessibility/field completeness and subsequent conversion metrics.
 
 [← Marketing portfolio](README.md)
