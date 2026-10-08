@@ -26,6 +26,10 @@ flowchart LR
 
 Each design illustrates a different form of constraint: cited sources, explicit required inputs, role-specific adaptations, strict output shape, or stop-and-escalate behavior when evidence is insufficient.
 
+### See the ideas applied
+
+[Read a synthetic example of source-grounded outreach and missing-evidence handling](DEMO-GUIDE.md). This is an illustrative input/output exercise, not an output from the original enterprise tools.
+
 ### Important boundaries
 - These are **documented internal tool concepts**, not exported GPT definitions.
 - Any sample output is illustrative and synthetic. No internal customer, product or knowledge files are redistributed.
