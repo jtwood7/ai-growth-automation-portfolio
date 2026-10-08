@@ -30,7 +30,7 @@ flowchart TD
 The assistant selects from **five approved editorial structures**: Answer-First, Problem → Solution → Proof, How-To + Checklist, Q&A Explainer, and Decision Guide. A structure-selection gate recommends the best fit when not specified, and the chosen template defines required sections. The draft uses an executive summary, key points, scannable sections, optional tables, and a CTA.
 
 ### 2. Source quality and claim governance
-The tool card specifies an explicit sourcing policy:
+The workflow applies an explicit sourcing policy:
 - Use **recent sources (generally within 24 months)** and verify recency.
 - Keep **at least 70%** of external sources primary or official.
 - Limit outbound sources to **10**, with descriptive in-sentence citations and direct URLs.
