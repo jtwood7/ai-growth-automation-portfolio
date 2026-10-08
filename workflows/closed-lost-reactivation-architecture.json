@@ -18,7 +18,8 @@
       "position": [
         0,
         304
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-000000000065"
     },
     {
       "parameters": {
@@ -33,7 +34,8 @@
       "position": [
         -240,
         480
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-000000000066"
     },
     {
       "parameters": {
@@ -48,7 +50,8 @@
         288,
         304
       ],
-      "notes": "DESIGN ASSUMPTION. Replace filters with the real Closed-Lost stage/view once DESIGN ASSUMPTION with Industrial Automation Co.."
+      "notes": "DESIGN ASSUMPTION. Replace filters with the real Closed-Lost stage/view once DESIGN ASSUMPTION with Industrial Automation Co..",
+      "id": "36e048d2-0000-4000-8000-000000000067"
     },
     {
       "parameters": {
@@ -61,7 +64,8 @@
         544,
         304
       ],
-      "notes": "DESIGN ASSUMPTION. Formula off HubSpot close date."
+      "notes": "DESIGN ASSUMPTION. Formula off HubSpot close date.",
+      "id": "36e048d2-0000-4000-8000-000000000068"
     },
     {
       "parameters": {
@@ -124,7 +128,8 @@
         800,
         304
       ],
-      "notes": "Fork point, not a trigger. Field may be sparse - see architecture assumptions."
+      "notes": "Fork point, not a trigger. Field may be sparse - see architecture assumptions.",
+      "id": "36e048d2-0000-4000-8000-000000000069"
     },
     {
       "parameters": {
@@ -139,7 +144,8 @@
       "position": [
         592,
         -16
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-00000000006a"
     },
     {
       "parameters": {
@@ -154,7 +160,8 @@
       "position": [
         1072,
         16
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-00000000006b"
     },
     {
       "parameters": {
@@ -167,7 +174,8 @@
         1088,
         128
       ],
-      "notes": "DESIGN ASSUMPTION. Loss date + 9-11 months. Flat proxy, not a real fiscal-year lookup."
+      "notes": "DESIGN ASSUMPTION. Loss date + 9-11 months. Flat proxy, not a real fiscal-year lookup.",
+      "id": "36e048d2-0000-4000-8000-00000000006c"
     },
     {
       "parameters": {
@@ -198,7 +206,8 @@
       "position": [
         1344,
         128
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-00000000006d"
     },
     {
       "parameters": {
@@ -213,7 +222,8 @@
       "position": [
         1056,
         656
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-00000000006e"
     },
     {
       "parameters": {
@@ -231,7 +241,8 @@
         1088,
         464
       ],
-      "notes": "BUILD REQUIRED. Clay Custom Signal - not pre-configured. Endpoint is a placeholder."
+      "notes": "BUILD REQUIRED. Clay Custom Signal - not pre-configured. Endpoint is a placeholder.",
+      "id": "36e048d2-0000-4000-8000-00000000006f"
     },
     {
       "parameters": {
@@ -243,7 +254,8 @@
       "position": [
         1344,
         464
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-000000000070"
     },
     {
       "parameters": {
@@ -274,7 +286,8 @@
       "position": [
         1600,
         464
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-000000000071"
     },
     {
       "parameters": {
@@ -289,7 +302,8 @@
       "position": [
         1872,
         32
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-000000000072"
     },
     {
       "parameters": {
@@ -307,7 +321,8 @@
         1872,
         304
       ],
-      "notes": "DESIGN ASSUMPTION. Clay Native Signal, filtered to original deal's title(s), OR if multiple."
+      "notes": "DESIGN ASSUMPTION. Clay Native Signal, filtered to original deal's title(s), OR if multiple.",
+      "id": "36e048d2-0000-4000-8000-000000000073"
     },
     {
       "parameters": {
@@ -319,7 +334,8 @@
       "position": [
         2128,
         304
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-000000000074"
     },
     {
       "parameters": {
@@ -350,7 +366,8 @@
       "position": [
         2384,
         304
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-000000000075"
     },
     {
       "parameters": {
@@ -381,7 +398,8 @@
       "position": [
         2640,
         304
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-000000000076"
     },
     {
       "parameters": {
@@ -396,7 +414,8 @@
       "position": [
         2640,
         32
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-000000000077"
     },
     {
       "parameters": {
@@ -414,7 +433,8 @@
         2912,
         128
       ],
-      "notes": "DESIGN ASSUMPTION. Clay Waterfall - fills in email, phone, LinkedIn for the already-identified new hire."
+      "notes": "DESIGN ASSUMPTION. Clay Waterfall - fills in email, phone, LinkedIn for the already-identified new hire.",
+      "id": "36e048d2-0000-4000-8000-000000000078"
     },
     {
       "parameters": {
@@ -432,7 +452,8 @@
         3168,
         128
       ],
-      "notes": "DESIGN ASSUMPTION. Blocking gate - no gift ships without a DESIGN ASSUMPTION address."
+      "notes": "DESIGN ASSUMPTION. Blocking gate - no gift ships without a DESIGN ASSUMPTION address.",
+      "id": "36e048d2-0000-4000-8000-000000000079"
     },
     {
       "parameters": {
@@ -457,13 +478,14 @@
         },
         "options": {}
       },
-      "name": "Address DESIGN ASSUMPTION? (Path A)",
+      "name": "Address confirmed? (Path A)",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
         3424,
         128
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-00000000007a"
     },
     {
       "parameters": {},
@@ -473,7 +495,8 @@
       "position": [
         3680,
         0
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-00000000007b"
     },
     {
       "parameters": {
@@ -491,7 +514,8 @@
         2912,
         384
       ],
-      "notes": "DESIGN ASSUMPTION. Clay Waterfall - core capability."
+      "notes": "DESIGN ASSUMPTION. Clay Waterfall - core capability.",
+      "id": "36e048d2-0000-4000-8000-00000000007c"
     },
     {
       "parameters": {
@@ -522,7 +546,8 @@
       "position": [
         3168,
         384
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-00000000007d"
     },
     {
       "parameters": {
@@ -543,7 +568,8 @@
       "position": [
         3424,
         304
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-00000000007e"
     },
     {
       "parameters": {
@@ -561,7 +587,8 @@
         3424,
         528
       ],
-      "notes": "DESIGN ASSUMPTION capability - only runs if original contact has left."
+      "notes": "DESIGN ASSUMPTION capability - only runs if original contact has left.",
+      "id": "36e048d2-0000-4000-8000-00000000007f"
     },
     {
       "parameters": {
@@ -592,7 +619,8 @@
       "position": [
         3680,
         528
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-000000000080"
     },
     {
       "parameters": {},
@@ -602,7 +630,8 @@
       "position": [
         3952,
         640
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-000000000081"
     },
     {
       "parameters": {
@@ -623,7 +652,8 @@
       "position": [
         3952,
         448
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-000000000082"
     },
     {
       "parameters": {
@@ -641,7 +671,8 @@
         4208,
         384
       ],
-      "notes": "DESIGN ASSUMPTION. Same blocking gate as Path A."
+      "notes": "DESIGN ASSUMPTION. Same blocking gate as Path A.",
+      "id": "36e048d2-0000-4000-8000-000000000083"
     },
     {
       "parameters": {
@@ -666,13 +697,14 @@
         },
         "options": {}
       },
-      "name": "Address DESIGN ASSUMPTION? (Path B)",
+      "name": "Address confirmed? (Path B)",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
         4464,
         384
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-000000000084"
     },
     {
       "parameters": {},
@@ -682,7 +714,8 @@
       "position": [
         4720,
         528
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-000000000085"
     },
     {
       "parameters": {
@@ -697,7 +730,8 @@
       "position": [
         4768,
         32
-      ]
+      ],
+      "id": "36e048d2-0000-4000-8000-000000000086"
     },
     {
       "parameters": {
@@ -717,7 +751,8 @@
         4768,
         272
       ],
-      "notes": "DESIGN ASSUMPTION. Prior deal size, champion, timeline, Closed-Lost Reason - baseline context regardless of trigger."
+      "notes": "DESIGN ASSUMPTION. Prior deal size, champion, timeline, Closed-Lost Reason - baseline context regardless of trigger.",
+      "id": "36e048d2-0000-4000-8000-000000000087"
     },
     {
       "parameters": {
@@ -735,7 +770,8 @@
         5024,
         272
       ],
-      "notes": "DESIGN ASSUMPTION (tracker tagging assumed configured). Personalization input, not a trigger."
+      "notes": "DESIGN ASSUMPTION (tracker tagging assumed configured). Personalization input, not a trigger.",
+      "id": "36e048d2-0000-4000-8000-000000000088"
     },
     {
       "parameters": {
@@ -748,7 +784,8 @@
         5280,
         272
       ],
-      "notes": "Exact prompt/model/field mapping to be specced after framework approval."
+      "notes": "Exact prompt/model/field mapping to be specced after framework approval.",
+      "id": "36e048d2-0000-4000-8000-000000000089"
     },
     {
       "parameters": {
@@ -766,7 +803,8 @@
         5552,
         272
       ],
-      "notes": "DESIGN ASSUMPTION. Address already validated upstream."
+      "notes": "DESIGN ASSUMPTION. Address already validated upstream.",
+      "id": "36e048d2-0000-4000-8000-00000000008a"
     },
     {
       "parameters": {
@@ -784,7 +822,8 @@
         5808,
         272
       ],
-      "notes": "DESIGN ASSUMPTION. Domain warmup / volume caps assumed already in place."
+      "notes": "DESIGN ASSUMPTION. Domain warmup / volume caps assumed already in place.",
+      "id": "36e048d2-0000-4000-8000-00000000008b"
     },
     {
       "parameters": {
@@ -792,14 +831,15 @@
         "path": "sendoso-delivery-DESIGN ASSUMPTION",
         "options": {}
       },
-      "name": "Webhook: Sendoso delivery DESIGN ASSUMPTION",
+      "name": "Webhook: Sendoso delivery confirmed",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
         6064,
         272
       ],
-      "notes": "DESIGN ASSUMPTION mechanism - webhook still needs to be registered in Sendoso's dashboard."
+      "notes": "DESIGN ASSUMPTION mechanism - webhook still needs to be registered in Sendoso's dashboard.",
+      "id": "36e048d2-0000-4000-8000-00000000008c"
     },
     {
       "parameters": {
@@ -819,7 +859,8 @@
         6320,
         272
       ],
-      "notes": "DESIGN ASSUMPTION. Fires only after delivery webhook confirms - not on send."
+      "notes": "DESIGN ASSUMPTION. Fires only after delivery webhook confirms - not on send.",
+      "id": "36e048d2-0000-4000-8000-00000000008d"
     },
     {
       "parameters": {
@@ -833,7 +874,8 @@
         6592,
         272
       ],
-      "notes": "DESIGN ASSUMPTION capability, but Instantly to HubSpot reply/open sync still needs a connector (see architecture assumptions)."
+      "notes": "DESIGN ASSUMPTION capability, but Instantly to HubSpot reply/open sync still needs a connector (see architecture assumptions).",
+      "id": "36e048d2-0000-4000-8000-00000000008e"
     }
   ],
   "connections": {
@@ -1014,7 +1056,7 @@
       "main": [
         [
           {
-            "node": "Address DESIGN ASSUMPTION? (Path A)",
+            "node": "Address confirmed? (Path A)",
             "type": "main",
             "index": 0
           }
@@ -1123,7 +1165,7 @@
       "main": [
         [
           {
-            "node": "Address DESIGN ASSUMPTION? (Path B)",
+            "node": "Address confirmed? (Path B)",
             "type": "main",
             "index": 0
           }
