@@ -1,0 +1,1223 @@
+{
+  "name": "Closed-Lost Reactivation (Architecture Demo)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24
+            }
+          ]
+        }
+      },
+      "name": "Daily schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "content": "WAKE THE DEAD - single flow\n\nPulls closed-lost pool from HubSpot, applies 60-day floor, forks on Closed-Lost Reason, checks each route's trigger + the shared new-hire trigger, routes person-known vs person-unknown, converges into one pre-send pipeline.\n\nCriteria:\n- 60-day floor\n\nStatus tags match the Tech Stack Signals doc: DESIGN ASSUMPTION / BUILD REQUIRED / FRAMEWORK PLACEHOLDER.",
+        "height": 428,
+        "width": 420,
+        "color": 4
+      },
+      "name": "Note: WAKE THE DEAD - single f",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "deal",
+        "operation": "getAll",
+        "filters": {}
+      },
+      "name": "HubSpot: get closed-lost deals",
+      "type": "n8n-nodes-base.hubspot",
+      "typeVersion": 2,
+      "position": [
+        288,
+        304
+      ],
+      "notes": "DESIGN ASSUMPTION. Replace filters with the real Closed-Lost stage/view once DESIGN ASSUMPTION with Industrial Automation Co.."
+    },
+    {
+      "parameters": {
+        "jsCode": "// DESIGN ASSUMPTION - pure date math, no external tool\nconst out = [];\nconst now = new Date();\nfor (const item of $input.all()) {\n  const closeDate = new Date(item.json.closedate || item.json.close_date);\n  const daysSinceLoss = (now - closeDate) / (1000 * 60 * 60 * 24);\n  if (daysSinceLoss >= 60) {\n    item.json.days_since_loss = Math.floor(daysSinceLoss);\n    item.json.months_since_loss = daysSinceLoss / 30;\n    out.push(item);\n  }\n}\nreturn out;"
+      },
+      "name": "Apply 60-day floor",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        544,
+        304
+      ],
+      "notes": "DESIGN ASSUMPTION. Formula off HubSpot close date."
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{$json.closed_lost_reason}}",
+                    "rightValue": "Budget",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Budget"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{$json.closed_lost_reason}}",
+                    "rightValue": "Timing",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Timing"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Fork: Budget vs Timing",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        800,
+        304
+      ],
+      "notes": "Fork point, not a trigger. Field may be sparse - see architecture assumptions."
+    },
+    {
+      "parameters": {
+        "content": "OPEN QUESTION\n\nReal dropdown values on Closed-Lost Reason? Assumed: 'Budget' / 'Timing'.",
+        "height": 152,
+        "width": 260,
+        "color": 3
+      },
+      "name": "Note: OPEN QUESTION\n\nReal drop",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        592,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "content": "BUDGET ROUTE\nOne trigger: annual budget-cycle proxy.",
+        "height": 90,
+        "width": 230,
+        "color": 6
+      },
+      "name": "Note: BUDGET ROUTE\nOne trigger",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1072,
+        16
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// DESIGN ASSUMPTION - formula only\nconst out = [];\nfor (const item of $input.all()) {\n  const m = item.json.months_since_loss;\n  if (m >= 9 && m <= 11) {\n    item.json.trigger_type = 'budget_cycle_proxy';\n    item.json.person_known = false;\n    out.push(item);\n  }\n}\nreturn out;"
+      },
+      "name": "Check: budget-cycle proxy window",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1088,
+        128
+      ],
+      "notes": "DESIGN ASSUMPTION. Loss date + 9-11 months. Flat proxy, not a real fiscal-year lookup."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{$json.trigger_type}}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "isNotEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Budget trigger fired?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1344,
+        128
+      ]
+    },
+    {
+      "parameters": {
+        "content": "TIMING ROUTE\nOne trigger: capex/expansion.\nHiring-role posts excluded (noisy).",
+        "height": 132,
+        "width": 260,
+        "color": 6
+      },
+      "name": "Note: TIMING ROUTE\nOne trigger",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1056,
+        656
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.example.invalid/v1/signals/capex-expansion",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"account_id\": \"={{$json.account_id}}\",\n  \"signal_type\": \"capex_expansion\"\n}",
+        "options": {}
+      },
+      "name": "Clay: check capex/expansion signal",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1088,
+        464
+      ],
+      "notes": "BUILD REQUIRED. Clay Custom Signal - not pre-configured. Endpoint is a placeholder."
+    },
+    {
+      "parameters": {
+        "jsCode": "const out = [];\nfor (const item of $input.all()) {\n  if (item.json.capex_event_detected) {\n    item.json.trigger_type = 'capex_expansion';\n    item.json.person_known = false;\n    out.push(item);\n  }\n}\nreturn out;"
+      },
+      "name": "Check: capex fired?",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1344,
+        464
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{$json.trigger_type}}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "isNotEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Capex trigger fired?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1600,
+        464
+      ]
+    },
+    {
+      "parameters": {
+        "content": "SHARED TRIGGER - both routes\nNew hire into decision-maker title.\nPromotion of original contact excluded.",
+        "height": 110,
+        "width": 280,
+        "color": 6
+      },
+      "name": "Note: SHARED TRIGGER - both ro",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1872,
+        32
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.example.invalid/v1/signals/new-hire",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"account_id\": \"={{$json.account_id}}\",\n  \"watch_titles\": \"={{$json.original_contact_title}}\"\n}",
+        "options": {}
+      },
+      "name": "Clay: check new-hire signal",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1872,
+        304
+      ],
+      "notes": "DESIGN ASSUMPTION. Clay Native Signal, filtered to original deal's title(s), OR if multiple."
+    },
+    {
+      "parameters": {
+        "jsCode": "const out = [];\nfor (const item of $input.all()) {\n  if (item.json.new_hire_detected && item.json.is_new_person) {\n    item.json.trigger_type = 'new_decision_maker';\n    item.json.person_known = true;\n    item.json.known_contact = item.json.new_hire_contact;\n    out.push(item);\n  }\n}\nreturn out;"
+      },
+      "name": "Check: new hire fired?",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2128,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{$json.trigger_type}}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "isNotEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "New-hire trigger fired?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2384,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{$json.person_known}}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Person already known?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2640,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "content": "COLLAPSE CANDIDATE\nPath A/B share steps 1-4 below; only Path B has extra verification up front. Could merge into one chain with a conditional first step.",
+        "height": 130,
+        "width": 280,
+        "color": 3
+      },
+      "name": "Note: COLLAPSE CANDIDATE\nPath ",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2640,
+        32
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.example.invalid/v1/enrich/complete-contact",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"contact\": \"={{$json.known_contact}}\"\n}",
+        "options": {}
+      },
+      "name": "Clay: complete contact record (Path A)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2912,
+        128
+      ],
+      "notes": "DESIGN ASSUMPTION. Clay Waterfall - fills in email, phone, LinkedIn for the already-identified new hire."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.example.invalid/v1/address/confirm",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"contact\": \"={{$json.contact}}\"\n}",
+        "options": {}
+      },
+      "name": "Sendoso: confirm address (Path A)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3168,
+        128
+      ],
+      "notes": "DESIGN ASSUMPTION. Blocking gate - no gift ships without a DESIGN ASSUMPTION address."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{$json.address_DESIGN ASSUMPTION}}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Address DESIGN ASSUMPTION? (Path A)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3424,
+        128
+      ]
+    },
+    {
+      "parameters": {},
+      "name": "Dead end: no address - recycle to Dormant (A)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        3680,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.example.invalid/v1/enrich/verify-employment",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"contact\": \"={{$json.original_contact}}\"\n}",
+        "options": {}
+      },
+      "name": "Clay: verify original contact employed (Path B)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2912,
+        384
+      ],
+      "notes": "DESIGN ASSUMPTION. Clay Waterfall - core capability."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{$json.still_employed}}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Still employed?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3168,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "contact",
+              "value": "={{$json.original_contact}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set contact = original",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3424,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.example.invalid/v1/enrich/find-by-title",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"account_id\": \"={{$json.account_id}}\",\n  \"title\": \"={{$json.original_contact_title}}\"\n}",
+        "options": {}
+      },
+      "name": "Clay: waterfall find replacement title-holder",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3424,
+        528
+      ],
+      "notes": "DESIGN ASSUMPTION capability - only runs if original contact has left."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{$json.replacement_found}}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Replacement found?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3680,
+        528
+      ]
+    },
+    {
+      "parameters": {},
+      "name": "Dead end: no replacement - recycle to Dormant (B)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        3952,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "contact",
+              "value": "={{$json.replacement_contact}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set contact = replacement",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3952,
+        448
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.example.invalid/v1/address/confirm",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"contact\": \"={{$json.contact}}\"\n}",
+        "options": {}
+      },
+      "name": "Sendoso: confirm address (Path B)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4208,
+        384
+      ],
+      "notes": "DESIGN ASSUMPTION. Same blocking gate as Path A."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{$json.address_DESIGN ASSUMPTION}}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Address DESIGN ASSUMPTION? (Path B)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        4464,
+        384
+      ]
+    },
+    {
+      "parameters": {},
+      "name": "Dead end: no address - recycle to Dormant (B)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        4720,
+        528
+      ]
+    },
+    {
+      "parameters": {
+        "content": "SHARED PRE-SEND PIPELINE\nBoth lanes converge here. Framework-level only - named steps, no prompt/field-mapping detail yet.",
+        "height": 130,
+        "width": 300,
+        "color": 4
+      },
+      "name": "Note: SHARED PRE-SEND PIPELINE",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4768,
+        32
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "deal",
+        "operation": "get",
+        "dealId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "filters": {}
+      },
+      "name": "HubSpot: get deal + rep history",
+      "type": "n8n-nodes-base.hubspot",
+      "typeVersion": 2,
+      "position": [
+        4768,
+        272
+      ],
+      "notes": "DESIGN ASSUMPTION. Prior deal size, champion, timeline, Closed-Lost Reason - baseline context regardless of trigger."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.example.invalid/v2/calls/tracked-topics",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"account_id\": \"={{$json.account_id}}\"\n}",
+        "options": {}
+      },
+      "name": "Gong: get loss-reason call tags",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5024,
+        272
+      ],
+      "notes": "DESIGN ASSUMPTION (tracker tagging assumed configured). Personalization input, not a trigger."
+    },
+    {
+      "parameters": {
+        "jsCode": "// FRAMEWORK LEVEL - named step only, no prompt/field-mapping detail yet\nconst item = $input.first().json;\nreturn [{\n  json: {\n    ...item,\n    ai_step: 'loss_reason_analysis_and_copy_generation',\n    gift_note: '[AI-GENERATED - not yet specced]',\n    outreach_copy: '[AI-GENERATED - not yet specced]',\n    status: 'framework_placeholder'\n  }\n}];"
+      },
+      "name": "AI: analyze loss reason + generate copy",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5280,
+        272
+      ],
+      "notes": "Exact prompt/model/field mapping to be specced after framework approval."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.example.invalid/v1/smartsend/send",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"contact\": \"={{$json.contact}}\",\n  \"note\": \"={{$json.gift_note}}\",\n  \"trigger_context\": \"={{$json.trigger_type}}\"\n}",
+        "options": {}
+      },
+      "name": "Sendoso: SmartSend gift",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5552,
+        272
+      ],
+      "notes": "DESIGN ASSUMPTION. Address already validated upstream."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.example.invalid/api/v2/campaigns/enroll",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"contact\": \"={{$json.contact}}\",\n  \"copy\": \"={{$json.outreach_copy}}\"\n}",
+        "options": {}
+      },
+      "name": "Instantly: enroll outreach sequence",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5808,
+        272
+      ],
+      "notes": "DESIGN ASSUMPTION. Domain warmup / volume caps assumed already in place."
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "sendoso-delivery-DESIGN ASSUMPTION",
+        "options": {}
+      },
+      "name": "Webhook: Sendoso delivery DESIGN ASSUMPTION",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        6064,
+        272
+      ],
+      "notes": "DESIGN ASSUMPTION mechanism - webhook still needs to be registered in Sendoso's dashboard."
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#wake-the-dead",
+          "mode": "name"
+        },
+        "text": "Delivered: {{$json.contact.company}} - {{$json.contact.name}}, {{$json.contact.title}}\\nTrigger: {{$json.trigger_type}}\\nAI talk track: {{$json.outreach_copy}}",
+        "otherOptions": {}
+      },
+      "name": "Slack: post rep context card",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        6320,
+        272
+      ],
+      "notes": "DESIGN ASSUMPTION. Fires only after delivery webhook confirms - not on send."
+    },
+    {
+      "parameters": {
+        "resource": "engagement",
+        "additionalFields": {}
+      },
+      "name": "HubSpot: log activity + update deal",
+      "type": "n8n-nodes-base.hubspot",
+      "typeVersion": 2,
+      "position": [
+        6592,
+        272
+      ],
+      "notes": "DESIGN ASSUMPTION capability, but Instantly to HubSpot reply/open sync still needs a connector (see architecture assumptions)."
+    }
+  ],
+  "connections": {
+    "Daily schedule": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: get closed-lost deals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HubSpot: get closed-lost deals": {
+      "main": [
+        [
+          {
+            "node": "Apply 60-day floor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apply 60-day floor": {
+      "main": [
+        [
+          {
+            "node": "Fork: Budget vs Timing",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Clay: check new-hire signal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fork: Budget vs Timing": {
+      "main": [
+        [
+          {
+            "node": "Check: budget-cycle proxy window",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Clay: check capex/expansion signal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check: budget-cycle proxy window": {
+      "main": [
+        [
+          {
+            "node": "Budget trigger fired?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Budget trigger fired?": {
+      "main": [
+        [
+          {
+            "node": "Person already known?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clay: check capex/expansion signal": {
+      "main": [
+        [
+          {
+            "node": "Check: capex fired?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check: capex fired?": {
+      "main": [
+        [
+          {
+            "node": "Capex trigger fired?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Capex trigger fired?": {
+      "main": [
+        [
+          {
+            "node": "Person already known?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clay: check new-hire signal": {
+      "main": [
+        [
+          {
+            "node": "Check: new hire fired?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check: new hire fired?": {
+      "main": [
+        [
+          {
+            "node": "New-hire trigger fired?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "New-hire trigger fired?": {
+      "main": [
+        [
+          {
+            "node": "Person already known?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Person already known?": {
+      "main": [
+        [
+          {
+            "node": "Clay: complete contact record (Path A)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Clay: verify original contact employed (Path B)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clay: complete contact record (Path A)": {
+      "main": [
+        [
+          {
+            "node": "Sendoso: confirm address (Path A)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sendoso: confirm address (Path A)": {
+      "main": [
+        [
+          {
+            "node": "Address DESIGN ASSUMPTION? (Path A)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Address confirmed? (Path A)": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: get deal + rep history",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Dead end: no address - recycle to Dormant (A)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clay: verify original contact employed (Path B)": {
+      "main": [
+        [
+          {
+            "node": "Still employed?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Still employed?": {
+      "main": [
+        [
+          {
+            "node": "Set contact = original",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Clay: waterfall find replacement title-holder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clay: waterfall find replacement title-holder": {
+      "main": [
+        [
+          {
+            "node": "Replacement found?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replacement found?": {
+      "main": [
+        [
+          {
+            "node": "Set contact = replacement",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Dead end: no replacement - recycle to Dormant (B)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set contact = original": {
+      "main": [
+        [
+          {
+            "node": "Sendoso: confirm address (Path B)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set contact = replacement": {
+      "main": [
+        [
+          {
+            "node": "Sendoso: confirm address (Path B)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sendoso: confirm address (Path B)": {
+      "main": [
+        [
+          {
+            "node": "Address DESIGN ASSUMPTION? (Path B)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Address confirmed? (Path B)": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: get deal + rep history",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Dead end: no address - recycle to Dormant (B)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HubSpot: get deal + rep history": {
+      "main": [
+        [
+          {
+            "node": "Gong: get loss-reason call tags",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gong: get loss-reason call tags": {
+      "main": [
+        [
+          {
+            "node": "AI: analyze loss reason + generate copy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI: analyze loss reason + generate copy": {
+      "main": [
+        [
+          {
+            "node": "Sendoso: SmartSend gift",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sendoso: SmartSend gift": {
+      "main": [
+        [
+          {
+            "node": "Instantly: enroll outreach sequence",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook: Sendoso delivery confirmed": {
+      "main": [
+        [
+          {
+            "node": "Slack: post rep context card",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack: post rep context card": {
+      "main": [
+        [
+          {
+            "node": "HubSpot: log activity + update deal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": []
+}
