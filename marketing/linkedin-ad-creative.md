@@ -16,7 +16,7 @@ flowchart LR
 
 ## Design mechanics
 
-The tool card describes page analysis for offer type (webinar, report, demo, trial), implied audience, core value promise, forms and CTA verbs. It then returns a structured **Final Ad Deliverables** package:
+The assistant analyzes the destination page for offer type (webinar, report, demo, trial), implied audience, core value promise, forms and CTA verbs. It then returns a structured **Final Ad Deliverables** package:
 
 | Deliverable | Constraint |
 |---|---|
