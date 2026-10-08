@@ -1,62 +1,62 @@
-# AI Growth & GTM Automation Portfolio
+# AI Growth, Marketing & Sales Automation Portfolio
 
-**Two acquisition-system prototypes · Five AI enablement case studies**  
-Designing repeatable ways to find, prioritize, engage and enable B2B buyers.
+**B2B growth systems, AI enablement and repeatable GTM workflows**
 
-> **Reviewer note:** This portfolio separates **n8n workflow prototypes** from **documented enterprise GPT designs**. The former include sanitized, inactive workflow JSON; the latter are case-study descriptions, **not downloadable GPTs or working reproductions**. No production results are claimed.
+A curated technical portfolio with **two acquisition automation prototypes** and **a broader set of AI assistant designs across marketing and sales**. Organized by the business function supported rather than by tool name.
 
-## Start here — choose what you want to evaluate
+> **How to read this:** The n8n workflows are inactive prototypes with sanitized JSON. The GPT case studies are capability descriptions drawn from an internal AI Tool Library, not live access to the tools or exported GPT configurations. No unverified deployment or ROI claims are made.
 
-| Area | Best for evaluating | Start with |
+## Browse by function
+
+| Area | What you'll find | Start here |
 |---|---|---|
-| **01 · [Acquisition Systems](acquisition/README.md)** | Intent signals, enrichment, routing, orchestration and technical decision logic | [Rep Empowerment Engine](docs/rep-empowerment.md) |
-| **02 · [AI Sales & Marketing Enablement](enablement/README.md)** | Task-specific assistants, structured output, knowledge grounding and AI adoption | [Account Strategy Copilot](enablement/account-strategy-copilot.md) |
-| **03 · [Implementation & Trust Boundaries](docs/technical-notes.md)** | What works, what is mocked and what would be required for production | [Workflow import notes](WORKFLOW-IMPORT-NOTES.md) |
+| **[01 — Acquisition Systems](acquisition/README.md)** | Intent signals, contact scoring, account qualification, routing and proposed outreach orchestration | [Rep Empowerment Engine](docs/rep-empowerment.md) |
+| **[02 — Marketing AI Enablement](marketing/README.md)** | Paid media, conversion, SEO/GEO, product messaging, field marketing, webinars, content repurposing and advocacy | [Marketing examples](marketing/README.md) |
+| **[03 — Sales AI Enablement](sales/README.md)** | Account intelligence, BDR personalization, proof retrieval, RFP responses, competitor comparisons and sales coaching | [Sales examples](sales/README.md) |
 
-## 01 / Acquisition systems
+## Featured architecture
 
 ```mermaid
 flowchart LR
- A[Account signal / closed-lost context] --> B[Contact and account evaluation]
- B --> C[Qualification and routing]
- C --> D[Rep action / nurture concept]
+    A["Buying signal / dormant opportunity"] --> B["Account and contact evaluation"]
+    B --> C["Decision rules / segmentation"]
+    C --> D["Seller action or nurture"]
 ```
 
-| Example | Core design | Inspect |
-|---|---|---|
-| **Rep Empowerment Engine** | Intent webhook, simulated contact enrichment, deterministic scoring, three-tier routing, rep prep | [Walkthrough](docs/rep-empowerment.md) · [22-node n8n JSON](workflows/rep-empowerment-demo.json) |
-| **Closed-Lost Reactivation** | Eligibility, change-in-context triggers, contact verification, proposed multi-touch reactivation | [Walkthrough](docs/reactivation.md) · [42-node architecture JSON](workflows/closed-lost-reactivation-architecture.json) |
+- **[Rep Empowerment Engine](docs/rep-empowerment.md)** — 22-node synthetic n8n example: webhook, mock contact enrichment, deterministic engagement/intent scoring and three-tier routing. [View JSON](workflows/rep-empowerment-demo.json).
+- **[Closed-Lost Reactivation](docs/reactivation.md)** — 42-node architecture prototype: loss reason, reactivation signals, contact resolution and proposed multichannel orchestration. [View JSON](workflows/closed-lost-reactivation-architecture.json).
 
-**Status:** Synthetic/inactive prototypes. CRM, enrichment and outbound integrations are partly mocked, disabled or unimplemented. The reactivation export has [known unresolved node references](WORKFLOW-IMPORT-NOTES.md).
+## Marketing capability map
 
-## 02 / AI enablement library — selected case studies
+| Capability | Example |
+|---|---|
+| Conversion and landing pages | [Landing-page architecture](marketing/landing-page-architecture.md) |
+| Paid search and creative testing | [Paid acquisition copy](marketing/paid-search-copy.md) |
+| Paid social | [LinkedIn ad creative](marketing/linkedin-ad-creative.md) |
+| Organic demand / GEO | [GEO and SEO content](marketing/geo-seo-content.md) |
+| Field and event campaigns | [Trade show campaign kit](marketing/trade-show-campaigns.md) |
+| Webinar lifecycle | [Webinar campaign drafting](enablement/webinar-lifecycle-campaigns.md) |
+| Content operations | [Webinar repurposing](marketing/webinar-content-repurposing.md) |
+| Employee advocacy | [Advocacy content](marketing/employee-advocacy.md) |
+| Product marketing | [Knowledge-grounded product messaging](marketing/product-messaging-system.md) |
 
-From a larger internal directory, these five examples illustrate different enablement patterns without distributing proprietary system prompts, customer files or enterprise configurations.
+## Sales capability map
 
-| Tool design | User | Technical pattern | Details |
-|---|---|---|---|
-| **Account Strategy Copilot** | AE | Current research → stakeholder mapping → tailored outreach | [Explore](enablement/account-strategy-copilot.md) |
-| **Signal-Led BDR Research** | BDR | Public triggers → pain hypotheses → supporting proof → email | [Explore](enablement/signal-led-bdr-research.md) |
-| **Evidence-Grounded Messaging** | Sales + marketing | Source retrieval → verifiable claims → reusable assets | [Explore](enablement/evidence-grounded-messaging.md) |
-| **Source-Grounded RFP Responses** | Solutions / proposals | Document intake → answer retrieval → citations + confidence | [Explore](enablement/source-grounded-rfp-responses.md) |
-| **Webinar Lifecycle Campaigns** | Demand generation | Event facts → pre-event drafts → post-event segments | [Explore](enablement/webinar-lifecycle-campaigns.md) |
+| Capability | Example |
+|---|---|
+| Account planning | [Account strategy copilot](enablement/account-strategy-copilot.md) |
+| Signal-led prospecting | [BDR account research](enablement/signal-led-bdr-research.md) |
+| Persona-led outreach | [Role-tailored email personalization](sales/role-tailored-outreach.md) |
+| Source-backed proof | [Evidence-grounded messaging](enablement/evidence-grounded-messaging.md) |
+| Proposal automation | [RFP response assistant](enablement/source-grounded-rfp-responses.md) |
+| Competitive intelligence | [RFP vendor comparisons](sales/competitive-rfp-analysis.md) |
+| Rep coaching | [Competitive objection practice](sales/objection-practice.md) |
 
-**Status:** These are descriptions derived from a tool catalog, **not deployable GPT exports**. The actual assistants were developed for an enterprise ChatGPT environment and cannot be independently executed from this repository.
+## Technical inspection and limits
 
-## Technical evidence and review
+- [Synthetic JavaScript scoring example](examples/scoring-demo.js)
+- [n8n import limitations](WORKFLOW-IMPORT-NOTES.md)
+- [Technical notes](docs/technical-notes.md)
+- [Sharing and ownership review checklist](SHARING-CHECKLIST.md)
 
-- [Rep contact scoring — standalone JavaScript exercise](examples/scoring-demo.js)
-- [Synthetic demo fixtures](examples/fixtures/synthetic-contacts.json)
-- [Workflow import limitations](WORKFLOW-IMPORT-NOTES.md)
-- [Implementation notes and known gaps](docs/technical-notes.md)
-- [Sharing and ownership checklist](SHARING-CHECKLIST.md)
-
-### Design principles reflected across the work
-
-- **Inputs before outputs:** Define the audience, authorized knowledge and task before generation.
-- **Rules where appropriate:** Use explicit thresholds and eligibility conditions rather than opaque judgments for spend and routing.
-- **Evidence before persuasion:** Separate observed facts and sourced outcomes from inferred problems and recommendations.
-- **Humans at consequential steps:** Outbound, CRM writes, RFP answers and customer claims require review and proper authorization.
-- **Honest status:** Distinguish prototypes, mock integrations and documented assistant concepts from live deployments.
-
-**Access and reuse:** Private review material. No implied permission to redistribute employer-owned assets. All examples are synthetic or generalized and should be checked for ownership and confidentiality before external sharing.
+The GPT case studies are **not functional replicas** and do not redistribute proprietary prompts or knowledge bases. The examples showcase tool design, constrained outputs and documented workflows. Review access rights before sharing outside this private repository.
