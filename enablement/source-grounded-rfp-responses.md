@@ -1,6 +1,6 @@
 # Source-Grounded RFP Responses
 
-**Portfolio adaptation of:** “Nurse & Staff RFP Assistant” in the AI Tool Library  
+**Portfolio adaptation of:** An internal, source-grounded RFP/RFI response assistant  
 **Category:** Proposal response automation / retrieval and review  
 **Artifact status:** Documented *functional prototype* in the source catalog; implementation files not provided here
 
