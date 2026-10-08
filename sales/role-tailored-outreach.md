@@ -1,31 +1,29 @@
 # Role-Tailored Outreach at Scale
 
-**Portfolio category:** Sales · BDR execution  
-**Source catalog entry:** BDR Outreach Assistant  
-**Status:** Documented AI assistant design from an internal tool directory. No enterprise GPT configuration, reference documents, credential access or runnable implementation is included.
+**Function:** BDR productivity and consistent outbound personalization.
 
-## Purpose
-Individualized prospect emails preserving the supplied template's structure and tone.
+## The challenge
 
-## Workflow concept
+A campaign may have a strong message, but manually adapting it to dozens of buyers leads to uneven quality and inconsistent structure. This assistant keeps the original outreach play intact while tailoring the relevance and language to each prospect.
+
+## Workflow
+
 ```mermaid
 flowchart LR
- A["Define input and audience"] --> B["Validate approved facts / context"]
- B --> C["Apply task-specific rules"]
- C --> D["Generate structured deliverables"]
- D --> E["Human review"]
+ A["Contact list + master email"] --> B["Identify role and account context"]
+ B --> C["Choose relevant pain and value angle"]
+ C --> D["Personalize each message"]
+ D --> E["Keep master template structure"]
+ E --> F["Rep-ready drafts for review"]
 ```
 
-## Inputs
-Contact list, master outreach template and role/persona details.
+## Core capabilities
 
-## Documented output
-Individualized prospect emails preserving the supplied template's structure and tone.
+- **Campaign consistency:** Preserve the supplied template's voice, structure and CTA rather than rewriting the strategy from scratch.
+- **Persona relevance:** Adapt the value angle, vocabulary and problem framing to different buyer roles.
+- **Scalable preparation:** Produce a reviewable draft for each contact with a consistent output pattern.
+- **Seller control:** Keep the rep's targeting judgment and final outreach decisions in the process.
 
-## What the design emphasizes
-Controlled personalization and output consistency; no CRM sync or sends evidenced.
+**Value to the team:** Personalization becomes a repeatable part of campaign execution instead of an ad hoc writing task for every rep.
 
-## Implementation and evidence boundaries
-This case study summarizes a catalog description, rather than reproducing proprietary system instructions or knowledge files. It does not independently demonstrate that the original assistant ran successfully, was integrated into marketing systems, or improved campaign performance. Actual prompts, files and outcomes have not been supplied for public reproduction.
-
-[← Sales index](README.md) · [← Portfolio home](../README.md)
+[← Sales systems](README.md)
