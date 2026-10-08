@@ -26,7 +26,7 @@ flowchart TD
 
 ## What it actually delivers
 
-A **six-email package** from a single webinar brief, URL or supporting document, with three coordinated pre-event messages and three post-event audience-specific messages. Each uses an exact output structure with subject line, preview text, body, three bullets, CTA and a standard module. The tool card specifies a narrative arc and audience-specific CTA handling, including on-demand links.
+A **six-email package** from a single webinar brief, URL or supporting document, with three coordinated pre-event messages and three post-event audience-specific messages. Each uses an exact output structure with subject line, preview text, body, three bullets, CTA and a standard module. The sequence follows a narrative arc with audience-specific CTAs, including on-demand links.
 
 ## Operational value
 
