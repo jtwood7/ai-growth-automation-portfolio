@@ -1,31 +1,44 @@
-# Trade Show Campaign Kit
+# Trade Show GTM Campaign Orchestration
 
-**Portfolio category:** Marketing · Field & event marketing  
-**Source catalog entry:** Trade Show Collateral Generator  
-**Status:** Documented AI assistant design from an internal tool directory. No enterprise GPT configuration, reference documents, credential access or runnable implementation is included.
+**Function:** Field marketing, demand generation and sales alignment  
+**Source basis:** Trade Show Collateral Generator tool card  
+**Artifact type:** Documented multi-asset campaign assistant
 
-## Purpose
-Pre/post-event emails, landing page copy, BDR/AE outreach and request emails in one package.
+## The operational challenge
 
-## Workflow concept
+A conference requires more than an announcement email. Field marketing, demand generation, BDRs, AEs and the web team need aligned messaging, dates, product proof, meeting-booking paths and follow-up. Producing assets independently slows launch and creates inconsistent handoffs.
+
+## Designed workflow
+
 ```mermaid
-flowchart LR
- A["Define input and audience"] --> B["Validate approved facts / context"]
- B --> C["Apply task-specific rules"]
- C --> D["Generate structured deliverables"]
- D --> E["Human review"]
+flowchart TD
+ A["Show URL / brief / booth / events"] --> B["Extract event facts and audience cues"]
+ B --> C["Confirm audience, relevant offers and product fit"]
+ C --> D["Map 3 message keys: pain → value → outcome"]
+ D --> E["Retrieve approved product facts and relevant case studies"]
+ E --> F["Assemble one coordinated campaign package"]
+ F --> G["QA for dates, links, claims and CTA consistency"]
+ G --> H["Field, web, BDR and AE handoff"]
 ```
 
-## Inputs
-Conference brief, audience, event specifics and sample tone.
+### Cross-functional output package
 
-## Documented output
-Pre/post-event emails, landing page copy, BDR/AE outreach and request emails in one package.
+| Team / motion | Documented deliverables |
+|---|---|
+| **Field + demand generation** | Event overview, three pre-event promotional emails and three post-event emails |
+| **Web team** | Meeting-booking landing page with hero, booth reason-to-visit, proof feature, form CTA and event details |
+| **BDR team** | Three-step prospecting sequence with relevance hook, event insight and low-friction follow-up |
+| **Account executives** | One-to-one pre-event meeting request and post-event conversation templates |
+| **Campaign operations** | Pre-event and post-event outreach-request emails, optional social snippets and QA checklist |
 
-## What the design emphasizes
-Cross-channel message consistency and reusable output structure; no live sends.
+The assistant can extract dates, place and themes from a **show URL**, reconcile add-on events, and assemble assets in one Word-pasteable campaign document. It uses existing example campaigns to govern structure and cadence, and approved product/customer-source materials for claims.
 
-## Implementation and evidence boundaries
-This case study summarizes a catalog description, rather than reproducing proprietary system instructions or knowledge files. It does not independently demonstrate that the original assistant ran successfully, was integrated into marketing systems, or improved campaign performance. Actual prompts, files and outcomes have not been supplied for public reproduction.
+### Value beyond generating text
 
-[← Marketing index](README.md) · [← Portfolio home](../README.md)
+The objective is **launch coordination at scale**: one agreed audience and message architecture feeds the landing page, marketing emails, sales outreach and follow-up motions. The output makes the dependencies between teams visible earlier, while maintaining a consistent reason to book a meeting.
+
+This is campaign *assembly* and handoff, not proven live orchestration. It does not itself register attendees, segment CRM lists, send emails, book meetings or attribute pipeline.
+
+**Useful measurements:** Time to campaign launch, number of asset revisions, pre-event booked meetings, booth meetings held, post-event follow-up completion and sourced/influenced pipeline. These are measurement recommendations, not outcomes established by the tool card.
+
+[← Marketing portfolio](README.md)
