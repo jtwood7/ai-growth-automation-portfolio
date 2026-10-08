@@ -1,8 +1,6 @@
 # Paid Media Message Testing Assistant
 
 **Function:** Paid demand generation and creative operations  
-**Source basis:** Ad Copy Generator tool card  
-**Documented design:** Campaign-brief-driven ad variations; not automated ad buying
 
 ## Problem being addressed
 
@@ -26,8 +24,8 @@ flowchart LR
 
 The intent is to **reduce creative-operations friction and make structured messaging variation repeatable** so paid marketers can spend more time evaluating angles and audience fit rather than rewriting the same offer across placements.
 
-**What this does not do:** It does not run experiments, choose budgets, manage bids, sync with an ad network or optimize performance from live conversion data. The seven outputs are candidates for testing, not evidence of lift.
+The seven variants give the paid team a structured set of creative angles to review, test and refine against conversion data.
 
-**Suggested evaluation:** Creative turnaround time, compliance/length pass rate, number of genuinely distinct angles approved and downstream CTR/CVR measured in the ad platforms.
+**Performance measures:** Creative turnaround time, compliance/length pass rate, number of genuinely distinct angles approved and downstream CTR/CVR measured in the ad platforms.
 
 [← Marketing portfolio](README.md)
