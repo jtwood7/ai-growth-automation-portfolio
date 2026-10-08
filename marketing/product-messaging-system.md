@@ -19,7 +19,7 @@ flowchart TD
 
 ### Knowledge isolation and approved evidence
 
-The source catalog documents **five** assistants for separate product families. Across these designs, the knowledge sources include product datasheets, market-facing assets, buyer-persona definitions, approved objection scripts, competitive positioning materials and case studies. Several tool cards explicitly prioritize a canonical datasheet or other knowledge file when statements conflict.
+The library includes **five** assistants for distinct product families. Their knowledge sources include product datasheets, market-facing assets, buyer-persona definitions, approved objection scripts, competitive positioning materials and case studies. Several tool cards explicitly prioritize a canonical datasheet or other knowledge file when statements conflict.
 
 The differentiation is not the fact that each tool can generate an email. It is that **the same GTM team can produce persona-relevant assets while constraining facts to the correct product's source of truth**.
 
