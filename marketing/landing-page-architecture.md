@@ -22,7 +22,7 @@ flowchart TD
 
 ### Decision system rather than free-form generation
 
-The source tool card describes an **XML-governed page architecture**, with a module palette, module-selection rules, page-layout constraints, CTA templates, form specifications and file-request templates. Those rules define which sections are appropriate for a given campaign and what information is required before the page is considered ready.
+The system uses an **XML-governed page architecture**, with a module palette, module-selection rules, page-layout constraints, CTA templates, form specifications and file-request templates. Those rules define which sections are appropriate for a given campaign and what information is required before the page is considered ready.
 
 The assistant asks targeted questions about audience, offer and conversion goal, then selects from permitted modules such as use cases, comparison or social proof. The user-supplied PDFs are the authority for product claims, metrics and customer evidence.
 
