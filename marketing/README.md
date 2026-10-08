@@ -1,44 +1,36 @@
 # Marketing AI Systems
 
-A cross-functional portfolio of **how AI supports marketing operations, not just content drafting**. These designs span conversion strategy, paid acquisition, organic growth, product marketing, event activation and content distribution.
+A cross-functional set of tools designed to turn campaign strategy, source material and brand knowledge into **coordinated marketing execution**. The emphasis is on repeatable processes, quality controls and cleaner handoffs across teams.
 
-> **Evidence level:** These case studies are based on individual Tool Cards from an internal AI Tool Library. They describe assistant inputs, decision rules and intended outputs. The original GPT configurations and implementation files are not included here; measured results are not inferred.
+## Campaign and content systems
 
-## Featured systems
-
-| System | What it operationalizes | Handoff |
+| System | What it solves | Downstream impact |
 |---|---|---|
-| **[GEO + SEO Content Production](geo-seo-content.md)** | Content architecture gate, source recency and citation governance, internal-link planning and QA | **Editorial + web team:** full article, SEO/OG metadata, URL slug, links and checklist |
-| **[Conversion Landing Pages](landing-page-architecture.md)** | Campaign objectives into rule-governed page modules, proof dependencies and reviewable layouts | **Design + web team:** executive snapshot, wireframe, asset map and visual preview |
-| **[Trade Show GTM Campaigns](trade-show-campaigns.md)** | One event brief into a coordinated pre-/post-show marketing and sales campaign | **Field + demand gen + BDR + AE:** emails, landing page, sequences, follow-up and QA |
-| **[Knowledge-Grounded Product Marketing](product-messaging-system.md)** | Maintain authoritative, persona-specific messaging across five product families | **Marketing + sales:** defensible value messaging, objections, proof and channel adaptations |
-| **[Webinar Content Repurposing](webinar-content-repurposing.md)** | Transcript insights into a reusable set of derivative assets and customer language | **Content + lifecycle + social + video:** blogs, emails, FAQs, social, quotes and clip briefs |
+| **[GEO + SEO Content System](geo-seo-content.md)** | Content structure, authoritative sourcing, full article development and QA | **Web team** receives article, metadata, internal links and publishing checklist in one package |
+| **[Landing Page Architecture](landing-page-architecture.md)** | Conversion strategy, page modules, proof and asset requirements | **Design/web** receives wireframe, copy, asset map and visual preview |
+| **[Trade Show GTM Campaigns](trade-show-campaigns.md)** | Coordinated messaging before and after field events | **Demand gen, field, BDR and AE** receive aligned campaign assets and meeting CTAs |
+| **[Product Messaging System](product-messaging-system.md)** | Consistent positioning and source-backed messaging across product families | **Sales and marketing** work from the same approved product narrative |
+| **[Webinar Repurposing](webinar-content-repurposing.md)** | Translate a transcript into reusable ideas and channel-specific assets | **Content, social, lifecycle and video** receive a structured asset plan |
 
-## Channel-specific execution tools
+## Paid acquisition and distribution
 
-| System | Distinctive role |
+| System | Capability |
 |---|---|
-| [Paid Media Message Testing](paid-search-copy.md) | Seven channel-aware creative hypotheses with length and claims controls |
-| [LinkedIn Landing-Page Alignment](linkedin-ad-creative.md) | Infer conversion objective from destination page, then construct matching ad fields |
-| [Webinar Lifecycle Campaigns](../enablement/webinar-lifecycle-campaigns.md) | Six-email campaign architecture with separate post-event messaging for attendees, no-shows and non-registrants |
-| [Employee Advocacy Distribution](employee-advocacy.md) | Reuse approved assets in four controlled social formats for employees |
+| [Paid Media Message Testing](paid-search-copy.md) | Produce distinct channel-aware creative angles with controlled claims and field lengths |
+| [LinkedIn Ad Alignment](linkedin-ad-creative.md) | Derive the right conversion promise and CTA from the landing page |
+| [Webinar Lifecycle Campaigns](../enablement/webinar-lifecycle-campaigns.md) | Build three pre-event messages and segmented follow-up for attendees, no-shows and non-registrants |
+| [Employee Advocacy](employee-advocacy.md) | Equip employee networks with accurate, format-varied promotion of approved assets |
 
-## Across the marketing lifecycle
+## Common operating model
 
 ```mermaid
 flowchart LR
- A["Campaign strategy"] --> B["Source + audience context"]
- B --> C["Governed asset system"]
- C --> D["Cross-team handoff"]
- D --> E["Human review + publication"]
+  A["Audience + campaign objective"] --> B["Validated source material"]
+  B --> C["Task-specific decisions and rules"]
+  C --> D["Structured multi-asset output"]
+  D --> E["Team review + execution"]
 ```
 
-### Where the engineering thinking shows up
+These systems take repetitive work out of campaign production while protecting message quality, creating clearer deliverable requirements and making more of each source asset.
 
-- **Content architecture:** Format selection logic, page-module rules and campaign structure.
-- **Knowledge governance:** Approved source hierarchy, claim and numerical-proof restrictions, source freshness and citation policy.
-- **Structured deliverables:** Defined outputs, character limits, source metadata, asset dependencies and acceptance checklists.
-- **Orchestration design:** Handing a consistent campaign strategy to field marketing, web, demand gen, BDRs, AEs and content teams.
-- **Measurement readiness:** Suggested quality, turnaround and downstream performance indicators, clearly separated from any demonstrated business results.
-
-[← Portfolio overview](../README.md) · [Sales AI systems →](../sales/README.md)
+[← Portfolio home](../README.md) · [Sales systems →](../sales/README.md)
