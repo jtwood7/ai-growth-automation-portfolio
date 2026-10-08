@@ -1,8 +1,6 @@
 # Evidence-Grounded Messaging
 
-**Portfolio adaptation of:** An internal customer-evidence retrieval and messaging assistant  
-**Category:** Knowledge retrieval / sales and marketing enablement  
-**Artifact status:** Documented design, not a working GPT export
+**Function:** Knowledge retrieval / sales and marketing enablement  
 
 ## Business problem
 Teams need to find the right case study and cite it correctly without inventing impressive-sounding metrics or reusing proof outside the relevant context.
@@ -20,7 +18,7 @@ flowchart LR
 ## Input contract
 - Task: objection response, messaging brief, proof table, email or one-page outline
 - Persona, segment and desired outcome
-- Authoritative case studies and product facts, **not distributed here**
+- Authoritative case studies and product facts
 
 ## Expected outputs
 - Evidence snapshot with verifiable metrics and context
@@ -33,7 +31,7 @@ flowchart LR
 - Surface insufficient, contradictory or missing evidence for review rather than forcing a claim.
 - Separate evidence retrieval from persuasive copywriting.
 
-## What this demonstrates
-Retrieval-grounded content design, auditability, source hygiene and communication of evidence confidence. **A catalog description is not a live retrieval or citation-validation test.**
+## GTM value
 
-[← AI enablement index](README.md)
+Turns scattered proof assets into a **source-grounded messaging resource**. Sales and marketing can find relevant evidence, see the context behind a claim and adapt it to buyer priorities without re-researching every use case.
+[← Sales systems](../sales/README.md)
