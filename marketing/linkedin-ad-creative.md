@@ -1,31 +1,36 @@
-# LinkedIn Ad Creative Assistant
+# Landing-Page-Aligned LinkedIn Ad Assistant
 
-**Portfolio category:** Marketing · Paid social  
-**Source catalog entry:** Linkedin Ad Assistant  
-**Status:** Documented AI assistant design from an internal tool directory. No enterprise GPT configuration, reference documents, credential access or runnable implementation is included.
+**Function:** Paid social, campaign conversion continuity  
+**Source basis:** LinkedIn Ad Assistant tool card  
+**Documented design:** Goal inference and structured ad-ready fields
 
-## Purpose
-Intro text, headline, description and alt text aligned to the landing-page conversion goal.
+## Problem
 
-## Workflow concept
+Ads underperform when their offer, CTA and promise do not match the destination page. This assistant uses the **landing page itself** to determine which conversion action the ad should support before it drafts creative.
+
 ```mermaid
 flowchart LR
- A["Define input and audience"] --> B["Validate approved facts / context"]
- B --> C["Apply task-specific rules"]
- C --> D["Generate structured deliverables"]
- D --> E["Human review"]
+ A["Destination URL + optional creative"] --> B["Inspect page content, form and CTA"]
+ B --> C["Infer offer type and main conversion goal"]
+ C --> D["Generate goal-aligned ad fields"]
+ D --> E["Marketer verifies message match"]
 ```
 
-## Inputs
-Landing-page URL or content, campaign context.
+## Design mechanics
 
-## Documented output
-Intro text, headline, description and alt text aligned to the landing-page conversion goal.
+The tool card describes page analysis for offer type (webinar, report, demo, trial), implied audience, core value promise, forms and CTA verbs. It then returns a structured **Final Ad Deliverables** package:
 
-## What the design emphasizes
-Derive the offer from the landing page; align messaging and field limits.
+| Deliverable | Constraint |
+|---|---|
+| Introductory text | Up to 150 characters; full sentences; concrete benefit and matching CTA |
+| Headline | Target ≤55 characters; aligned to offer and value promise |
+| Description | Up to 150 characters; complements the headline |
+| Image alt text | Up to 300 characters if an image is provided; otherwise a clear absence notice |
 
-## Implementation and evidence boundaries
-This case study summarizes a catalog description, rather than reproducing proprietary system instructions or knowledge files. It does not independently demonstrate that the original assistant ran successfully, was integrated into marketing systems, or improved campaign performance. Actual prompts, files and outcomes have not been supplied for public reproduction.
+Its value is **ad-to-landing-page consistency** and a defined handoff to paid media production, rather than just producing attractive wording. It avoids invented metrics and is expected to handle inaccessible pages explicitly.
 
-[← Marketing index](README.md) · [← Portfolio home](../README.md)
+**Scope:** One ad deliverable set from one page. No campaign deployment, pixel validation, funnel measurement or real-time ad optimization is demonstrated.
+
+**Suggested evaluation:** Ad/page message-match review, revisions to approval, accessibility/field completeness and subsequent conversion metrics.
+
+[← Marketing portfolio](README.md)
