@@ -17,7 +17,6 @@ Tools that turn account research, customer evidence and commercial context into 
 | [Evidence-Grounded Messaging](../enablement/evidence-grounded-messaging.md) | Retrieve the right case study and translate verified outcomes into role-specific talking points |
 | [RFP Response Assistant](../enablement/source-grounded-rfp-responses.md) | Extract questions and use approved sources to build structured, reviewable answers |
 | [Vendor Comparison](competitive-rfp-analysis.md) | Compare proposal evidence by facet to inform competitive positioning |
-| [Competitive Objection Practice](objection-practice.md) | Practice objection-handling scenarios and sharpen commercial responses |
 
 For cross-system automation, see the [Rep Empowerment Engine](../docs/rep-empowerment.md).
 
